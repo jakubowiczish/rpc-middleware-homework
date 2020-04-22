@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_package = "sr.grpc.generated.air_quality";
+
+message AirQualityInfo {
+  string city = 1;
+  AirQualityStatus pollutionStatus = 2;
+  repeated AirQualityIndex airQualityParam = 3;
+
+  message AirQualityIndex {
+    string paramName = 1;
+    repeated double lastMeasurements = 2;
+  }
+
+  enum AirQualityStatus {
+    EXTREMELY_BAD = 0;
+    BAD = 1;
+    MEDIUM = 2;
+    ACCEPTABLE = 3;
+    GOOD = 4;
+  }
+}
+
+message AirQualityRequest {
+  string city = 1;
+  string clientName = 2;
+}
+
+service AirQualityService {
+  rpc SubscribeOnAirQuality (AirQualityRequest) returns (stream AirQualityInfo) {}
+}
+
