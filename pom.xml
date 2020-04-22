@@ -14,19 +14,8 @@
     </properties>
 
     <build>
-        <sourceDirectory>src</sourceDirectory>
-
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <includes>
-                        <include>gen</include>
-                    </includes>
-                </configuration>
-            </plugin>
-        </plugins>
+        <finalName>middleware_grpc</finalName>
+        <sourceDirectory>src/, gen/</sourceDirectory>
     </build>
 
     <dependencies>
