@@ -2,6 +2,8 @@
 
 ##### Server
 
+- Generate
+
 In order to generate files (they are already generated)
 
 ```
@@ -9,10 +11,14 @@ cd server
 java_gen_air_quality.bat
 ```
 
-To run - just run AirQualityClientRunner.java
+- Run
+
+Just run AirQualityClientRunner.java
 
 
 ##### Client
+
+- Generate
 
 In order to generate files (they are already generated)
 
@@ -27,6 +33,13 @@ In order to fix it, modify 4th line of this file, it should be like:
 
 ```
 from . import air_quality_pb2 as air__quality__pb2
+```
+
+- Run
+
+```
+poetry install
+poetry run python air_quality_client.py
 ```
 
 ### Opis zadania domowego - technologie middleware
