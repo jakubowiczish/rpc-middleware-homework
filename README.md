@@ -1,3 +1,34 @@
+## Run
+
+##### Server
+
+In order to generate files (they are already generated)
+
+```
+cd server
+java_gen_air_quality.bat
+```
+
+To run - just run AirQualityClientRunner.java
+
+
+##### Client
+
+In order to generate files (they are already generated)
+
+```
+cd client
+python_gen_air_quality.bat
+```
+
+There might be a problem sometimes with content of ```air_quality_pb2_grpc.py```
+
+In order to fix it, modify 4th line of this file, it should be like:
+
+```
+from . import air_quality_pb2 as air__quality__pb2
+```
+
 ### Opis zadania domowego - technologie middleware
 
 #### Zadanie składa się z dwóch części.

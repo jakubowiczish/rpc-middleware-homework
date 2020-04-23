@@ -1,0 +1,11 @@
+[tool.poetry]
+name = "middleware_grpc_client"
+version = "0.1.0"
+description = ""
+authors = ["jakubowiczish"]
+
+
+[tool.poetry.dependencies]
+python = "3.8.2"
+grpcio = "^1.14"
+grpcio_tools = "^1.14"
