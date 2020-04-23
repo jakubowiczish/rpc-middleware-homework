@@ -1962,16 +1962,16 @@ public final class AirQuality {
         getCityBytes();
 
     /**
-     * <code>string clientName = 2;</code>
-     * @return The clientName.
+     * <code>string clientIdentifier = 2;</code>
+     * @return The clientIdentifier.
      */
-    java.lang.String getClientName();
+    java.lang.String getClientIdentifier();
     /**
-     * <code>string clientName = 2;</code>
-     * @return The bytes for clientName.
+     * <code>string clientIdentifier = 2;</code>
+     * @return The bytes for clientIdentifier.
      */
     com.google.protobuf.ByteString
-        getClientNameBytes();
+        getClientIdentifierBytes();
   }
   /**
    * Protobuf type {@code AirQualityRequest}
@@ -1987,7 +1987,7 @@ public final class AirQuality {
     }
     private AirQualityRequest() {
       city_ = "";
-      clientName_ = "";
+      clientIdentifier_ = "";
     }
 
     @java.lang.Override
@@ -2029,7 +2029,7 @@ public final class AirQuality {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              clientName_ = s;
+              clientIdentifier_ = s;
               break;
             }
             default: {
@@ -2100,36 +2100,36 @@ public final class AirQuality {
       }
     }
 
-    public static final int CLIENTNAME_FIELD_NUMBER = 2;
-    private volatile java.lang.Object clientName_;
+    public static final int CLIENTIDENTIFIER_FIELD_NUMBER = 2;
+    private volatile java.lang.Object clientIdentifier_;
     /**
-     * <code>string clientName = 2;</code>
-     * @return The clientName.
+     * <code>string clientIdentifier = 2;</code>
+     * @return The clientIdentifier.
      */
-    public java.lang.String getClientName() {
-      java.lang.Object ref = clientName_;
+    public java.lang.String getClientIdentifier() {
+      java.lang.Object ref = clientIdentifier_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        clientName_ = s;
+        clientIdentifier_ = s;
         return s;
       }
     }
     /**
-     * <code>string clientName = 2;</code>
-     * @return The bytes for clientName.
+     * <code>string clientIdentifier = 2;</code>
+     * @return The bytes for clientIdentifier.
      */
     public com.google.protobuf.ByteString
-        getClientNameBytes() {
-      java.lang.Object ref = clientName_;
+        getClientIdentifierBytes() {
+      java.lang.Object ref = clientIdentifier_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        clientName_ = b;
+        clientIdentifier_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -2153,8 +2153,8 @@ public final class AirQuality {
       if (!getCityBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, city_);
       }
-      if (!getClientNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, clientName_);
+      if (!getClientIdentifierBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, clientIdentifier_);
       }
       unknownFields.writeTo(output);
     }
@@ -2168,8 +2168,8 @@ public final class AirQuality {
       if (!getCityBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, city_);
       }
-      if (!getClientNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, clientName_);
+      if (!getClientIdentifierBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, clientIdentifier_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2188,8 +2188,8 @@ public final class AirQuality {
 
       if (!getCity()
           .equals(other.getCity())) return false;
-      if (!getClientName()
-          .equals(other.getClientName())) return false;
+      if (!getClientIdentifier()
+          .equals(other.getClientIdentifier())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2203,8 +2203,8 @@ public final class AirQuality {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CITY_FIELD_NUMBER;
       hash = (53 * hash) + getCity().hashCode();
-      hash = (37 * hash) + CLIENTNAME_FIELD_NUMBER;
-      hash = (53 * hash) + getClientName().hashCode();
+      hash = (37 * hash) + CLIENTIDENTIFIER_FIELD_NUMBER;
+      hash = (53 * hash) + getClientIdentifier().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2340,7 +2340,7 @@ public final class AirQuality {
         super.clear();
         city_ = "";
 
-        clientName_ = "";
+        clientIdentifier_ = "";
 
         return this;
       }
@@ -2369,7 +2369,7 @@ public final class AirQuality {
       public sr.grpc.generated.air_quality.AirQuality.AirQualityRequest buildPartial() {
         sr.grpc.generated.air_quality.AirQuality.AirQualityRequest result = new sr.grpc.generated.air_quality.AirQuality.AirQualityRequest(this);
         result.city_ = city_;
-        result.clientName_ = clientName_;
+        result.clientIdentifier_ = clientIdentifier_;
         onBuilt();
         return result;
       }
@@ -2422,8 +2422,8 @@ public final class AirQuality {
           city_ = other.city_;
           onChanged();
         }
-        if (!other.getClientName().isEmpty()) {
-          clientName_ = other.clientName_;
+        if (!other.getClientIdentifier().isEmpty()) {
+          clientIdentifier_ = other.clientIdentifier_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -2531,78 +2531,78 @@ public final class AirQuality {
         return this;
       }
 
-      private java.lang.Object clientName_ = "";
+      private java.lang.Object clientIdentifier_ = "";
       /**
-       * <code>string clientName = 2;</code>
-       * @return The clientName.
+       * <code>string clientIdentifier = 2;</code>
+       * @return The clientIdentifier.
        */
-      public java.lang.String getClientName() {
-        java.lang.Object ref = clientName_;
+      public java.lang.String getClientIdentifier() {
+        java.lang.Object ref = clientIdentifier_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          clientName_ = s;
+          clientIdentifier_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string clientName = 2;</code>
-       * @return The bytes for clientName.
+       * <code>string clientIdentifier = 2;</code>
+       * @return The bytes for clientIdentifier.
        */
       public com.google.protobuf.ByteString
-          getClientNameBytes() {
-        java.lang.Object ref = clientName_;
+          getClientIdentifierBytes() {
+        java.lang.Object ref = clientIdentifier_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          clientName_ = b;
+          clientIdentifier_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string clientName = 2;</code>
-       * @param value The clientName to set.
+       * <code>string clientIdentifier = 2;</code>
+       * @param value The clientIdentifier to set.
        * @return This builder for chaining.
        */
-      public Builder setClientName(
+      public Builder setClientIdentifier(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        clientName_ = value;
+        clientIdentifier_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string clientName = 2;</code>
+       * <code>string clientIdentifier = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearClientName() {
+      public Builder clearClientIdentifier() {
         
-        clientName_ = getDefaultInstance().getClientName();
+        clientIdentifier_ = getDefaultInstance().getClientIdentifier();
         onChanged();
         return this;
       }
       /**
-       * <code>string clientName = 2;</code>
-       * @param value The bytes for clientName to set.
+       * <code>string clientIdentifier = 2;</code>
+       * @param value The bytes for clientIdentifier to set.
        * @return This builder for chaining.
        */
-      public Builder setClientNameBytes(
+      public Builder setClientIdentifierBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        clientName_ = value;
+        clientIdentifier_ = value;
         onChanged();
         return this;
       }
@@ -2691,11 +2691,11 @@ public final class AirQuality {
       "e\030\001 \001(\t\022\030\n\020lastMeasurements\030\002 \003(\001\"T\n\020Air" +
       "QualityStatus\022\021\n\rEXTREMELY_BAD\020\000\022\007\n\003BAD\020" +
       "\001\022\n\n\006MEDIUM\020\002\022\016\n\nACCEPTABLE\020\003\022\010\n\004GOOD\020\004\"" +
-      "5\n\021AirQualityRequest\022\014\n\004city\030\001 \001(\t\022\022\n\ncl" +
-      "ientName\030\002 \001(\t2U\n\021AirQualityService\022@\n\025S" +
-      "ubscribeOnAirQuality\022\022.AirQualityRequest" +
-      "\032\017.AirQualityInfo\"\0000\001B\037\n\035sr.grpc.generat" +
-      "ed.air_qualityb\006proto3"
+      ";\n\021AirQualityRequest\022\014\n\004city\030\001 \001(\t\022\030\n\020cl" +
+      "ientIdentifier\030\002 \001(\t2U\n\021AirQualityServic" +
+      "e\022@\n\025SubscribeOnAirQuality\022\022.AirQualityR" +
+      "equest\032\017.AirQualityInfo\"\0000\001B\037\n\035sr.grpc.g" +
+      "enerated.air_qualityb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2718,7 +2718,7 @@ public final class AirQuality {
     internal_static_AirQualityRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AirQualityRequest_descriptor,
-        new java.lang.String[] { "City", "ClientName", });
+        new java.lang.String[] { "City", "ClientIdentifier", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
