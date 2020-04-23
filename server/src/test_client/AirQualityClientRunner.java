@@ -1,4 +1,4 @@
-package client;
+package test_client;
 
 public class AirQualityClientRunner {
 

@@ -1,4 +1,4 @@
-package client;
+package test_client;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
