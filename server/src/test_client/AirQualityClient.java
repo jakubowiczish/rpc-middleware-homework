@@ -62,7 +62,7 @@ public class AirQualityClient {
                 }
 
             } catch (Exception e) {
-                printlnColoured("Connection problems....", ConsoleColor.RED_BOLD_BRIGHT);
+                printlnColoured("Connection issues....", ConsoleColor.RED_BOLD_BRIGHT);
                 sleep(1000);
             }
         }
