@@ -40,6 +40,11 @@ public class DataGenerationService {
     }
 
     public void subscribeOnDataGeneration(AirQualitySubscriber subscriber) {
+        if (!LIST_OF_AVAILABLE_CITIES.contains(subscriber.getCity())) {
+            printlnColoured("Subscriber could not be added, city: " + subscriber.getCity() + " does not exist.", ConsoleColor.RED_BOLD);
+            return;
+        }
+
         subscribers.add(subscriber);
         printlnColoured("New subscriber has been added: " + subscriber, ConsoleColor.BLUE_BOLD);
     }
