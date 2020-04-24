@@ -1,5 +1,7 @@
 ### Generating, Building and Running:
 
+#### GRPC
+
 ##### Server
 
 - Generate
@@ -7,7 +9,7 @@
 In order to generate files (they are already generated)
 
 ```
-cd server
+cd grpc/server_grpc
 .\java_gen_air_quality.bat
 ```
 
@@ -16,12 +18,14 @@ cd server
 or 
 
 ```
+cd grpc/server_grpc
 .\build_and_run.bat
 ```
 
 or 
 
 ```
+cd grpc/server_grpc
 .\build_and_run2.bat
 ```
 
@@ -32,6 +36,7 @@ Just run AirQualityClientRunner.java in Intellij IDEA
 or
 
 ```
+cd grpc/server_grpc
 .\build.bat
 .\run.bat
 ```
@@ -43,8 +48,8 @@ or
 In order to generate files (they are already generated)
 
 ```
-cd client
-python_gen_air_quality.bat
+cd cd grpc/client_grpc
+.\python_gen_air_quality.bat
 ```
 
 There might be a problem sometimes with content of ```air_quality_pb2_grpc.py```
@@ -58,12 +63,14 @@ from . import air_quality_pb2 as air__quality__pb2
 - Run
 
 ```
+cd grpc/client_grpc
 .\build_and_run.bat
 ```
 
 or 
 
 ```
+cd grpc/client_grpc
 .\build.bat
 .\run.bat
 ```
@@ -71,9 +78,15 @@ or
 or 
 
 ```
+cd grpc/client_grpc
 poetry install
 poetry run python air_quality_client.py
 ```
+
+#### THRIFT
+
+
+
 
 ### Opis zadania domowego - technologie middleware
 
