@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.agh.edu.sr</groupId>
-    <artifactId>middleware_grpc</artifactId>
+    <artifactId>rpc_middleware</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
@@ -36,6 +36,18 @@
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>0.13.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
         </dependency>
     </dependencies>
 </project>

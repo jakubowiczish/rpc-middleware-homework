@@ -15,7 +15,7 @@ def run():
     while True:
         try:
             channel = create_channel()
-            print("Client has started")
+            print("Client's connecting...")
 
             air_quality_service_stub = air_quality_pb2_grpc.AirQualityServiceStub(channel)
             client_identifier = str(uuid.uuid1())
