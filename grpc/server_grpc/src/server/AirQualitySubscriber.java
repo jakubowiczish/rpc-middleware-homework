@@ -8,7 +8,6 @@ import java.util.List;
 
 @Getter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class AirQualitySubscriber {
@@ -22,5 +21,10 @@ public class AirQualitySubscriber {
 
     public boolean hasLostConnection() {
         return this.errors >= 3;
+    }
+
+    @Override
+    public String toString() {
+        return "Subscriber(city: " + city + ", clientId: " + clientId + ")";
     }
 }

@@ -21,9 +21,9 @@ def run():
             client_identifier = str(uuid.uuid1())
             request = create_request(city_name, client_identifier)
 
-            subscription = air_quality_service_stub.SubscribeOnAirQuality(request)
+            future_result = air_quality_service_stub.SubscribeOnAirQuality(request)
 
-            for item in subscription:
+            for item in future_result:
                 print(item)
 
             print('Server has ended processing')
