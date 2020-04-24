@@ -17,7 +17,6 @@
         <exec.mainClass>server.AirQualityServerRunner</exec.mainClass>
     </properties>
 
-
     <build>
         <finalName>middleware_grpc</finalName>
         <sourceDirectory>src</sourceDirectory>
