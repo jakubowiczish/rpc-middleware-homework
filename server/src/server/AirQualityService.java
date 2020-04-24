@@ -5,8 +5,6 @@ import sr.grpc.generated.air_quality.AirQuality.AirQualityInfo;
 import sr.grpc.generated.air_quality.AirQuality.AirQualityRequest;
 import sr.grpc.generated.air_quality.AirQualityServiceGrpc.AirQualityServiceImplBase;
 
-import java.util.Collections;
-
 public class AirQualityService extends AirQualityServiceImplBase {
 
     private final DataGenerationService generationService;
@@ -21,7 +19,7 @@ public class AirQualityService extends AirQualityServiceImplBase {
 
         final AirQualitySubscriber subscriber = AirQualitySubscriber.builder()
                 .responseObserver(responseObserver)
-                .errors(Collections.emptyList())
+                .errors(0)
                 .city(request.getCity())
                 .clientId(request.getClientIdentifier())
                 .build();

@@ -15,6 +15,12 @@ public class AirQualitySubscriber {
 
     private String city;
     private String clientId;
-    private List<Throwable> errors;
+
+    @Setter
+    private int errors;
     private StreamObserver<AirQualityInfo> responseObserver;
+
+    public boolean hasLostConnection() {
+        return this.errors >= 3;
+    }
 }

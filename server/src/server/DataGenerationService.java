@@ -6,9 +6,7 @@ import sr.grpc.generated.air_quality.AirQuality.AirQualityInfo.AirQualityIndex;
 import sr.grpc.generated.air_quality.AirQuality.AirQualityInfo.AirQualityStatus;
 import util.ConsoleColor;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.IntStream;
 
@@ -56,7 +54,8 @@ public class DataGenerationService {
                     .build();
 
             sendAirQualityInfo(airQualityInfo);
-            sleep(1000);
+            removeClientsWithFatalConnectionIssues();
+            sleep(300);
         }
     }
 
@@ -91,10 +90,23 @@ public class DataGenerationService {
 
             try {
                 subscriber.getResponseObserver().onNext(airQualityInfo);
+                subscriber.setErrors(0);
             } catch (Exception e) {
                 printlnColoured("Error while sending message to subscriber: " + subscriber.getClientId(), ConsoleColor.RED_BOLD_BRIGHT);
+                subscriber.setErrors(subscriber.getErrors() + 1);
             }
         }
     }
 
+    private void removeClientsWithFatalConnectionIssues() {
+        Set<AirQualitySubscriber> subscribersToRemove = new CopyOnWriteArraySet<>();
+        subscribers.stream()
+                .filter(AirQualitySubscriber::hasLostConnection)
+                .forEach(subscriber -> {
+                    printlnColoured("Removing subscriber: " + subscriber.getClientId() + " because of fatal connection issues", ConsoleColor.RED_BOLD);
+                    subscribersToRemove.add(subscriber);
+                });
+
+        subscribers.removeAll(subscribersToRemove);
+    }
 }
