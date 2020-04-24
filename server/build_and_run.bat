@@ -1,1 +1,1 @@
-mvn -X clean install -DskipTests exec:java -Dexec.mainClass="server.AirQualityServerRunner"
+.\build.bat && .\run.bat

@@ -1,4 +1,4 @@
-## Run
+### Generating, Building and Running:
 
 ##### Server
 
@@ -8,13 +8,33 @@ In order to generate files (they are already generated)
 
 ```
 cd server
-java_gen_air_quality.bat
+.\java_gen_air_quality.bat
 ```
 
-- Run
+- Build & Run
 
-Just run AirQualityClientRunner.java
+or 
 
+```
+.\build_and_run.bat
+```
+
+or 
+
+```
+.\build_and_run2.bat
+```
+
+or
+
+Just run AirQualityClientRunner.java in Intellij IDEA
+
+or
+
+```
+.\build.bat
+.\run.bat
+```
 
 ##### Client
 
@@ -36,6 +56,19 @@ from . import air_quality_pb2 as air__quality__pb2
 ```
 
 - Run
+
+```
+.\build_and_run.bat
+```
+
+or 
+
+```
+.\build.bat
+.\run.bat
+```
+
+or 
 
 ```
 poetry install
