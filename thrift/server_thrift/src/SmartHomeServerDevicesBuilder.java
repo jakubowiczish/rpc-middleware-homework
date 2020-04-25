@@ -1,5 +1,5 @@
-import handler.DevicesListHandler;
-import handler.main.HomeDeviceHandler;
+import handler.DevicesListController;
+import handler.HomeDeviceHandler;
 import lombok.SneakyThrows;
 import org.apache.thrift.TMultiplexedProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -13,39 +13,46 @@ import sr.rpc.thrift.DevicesList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class SmartHomeServerCreator {
+public class SmartHomeServerDevicesBuilder {
 
     private static final int port = 9090;
     private static final String ALL_HOME_DEVICES_SERVICE_NAME = "all";
 
-    private List<HomeDeviceHandler> homeDevices;
-    private TMultiplexedProcessor multiplexedProcessor;
+    private final List<HomeDeviceHandler> homeDevices;
+    private final TMultiplexedProcessor multiplexedProcessor;
 
-    public SmartHomeServerCreator() {
+    private TServer server;
+
+    public SmartHomeServerDevicesBuilder() {
         homeDevices = new CopyOnWriteArrayList<>();
         multiplexedProcessor = new TMultiplexedProcessor();
     }
 
-    public void addNewDevice(HomeDeviceHandler handler) {
+    public SmartHomeServerDevicesBuilder addNewDevice(HomeDeviceHandler handler) {
         homeDevices.add(handler);
         multiplexedProcessor.registerProcessor(handler.getIdentifier(), handler.getProcessor());
+        return this;
     }
 
     @SneakyThrows
-    public void create() {
+    public SmartHomeServerDevicesBuilder create() {
         multiplexedProcessor.registerProcessor(ALL_HOME_DEVICES_SERVICE_NAME, getAllDevicesProcessor());
 
         final TServerTransport transport = new TServerSocket(port);
         final TProtocolFactory protocolFactory = new TBinaryProtocol.Factory();
 
-        final TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(transport)
+        server =  new TThreadPoolServer(new TThreadPoolServer.Args(transport)
                 .protocolFactory(protocolFactory)
                 .processor(multiplexedProcessor));
 
+        return this;
+    }
+
+    public void serve() {
         server.serve();
     }
 
-    private DevicesList.Processor<DevicesListHandler> getAllDevicesProcessor() {
-        return new DevicesList.Processor<>(new DevicesListHandler(homeDevices));
+    private DevicesList.Processor<DevicesListController> getAllDevicesProcessor() {
+        return new DevicesList.Processor<>(new DevicesListController(homeDevices));
     }
 }

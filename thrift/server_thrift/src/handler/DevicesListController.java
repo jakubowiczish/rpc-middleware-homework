@@ -1,6 +1,5 @@
 package handler;
 
-import handler.main.HomeDeviceHandler;
 import org.apache.thrift.TException;
 import sr.rpc.thrift.Device;
 import sr.rpc.thrift.DevicesList;
@@ -9,11 +8,11 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class DevicesListHandler implements DevicesList.Iface {
+public class DevicesListController implements DevicesList.Iface {
 
     private List<Device> listOfDevices;
 
-    public DevicesListHandler(List<HomeDeviceHandler> deviceHandlerList) {
+    public DevicesListController(List<HomeDeviceHandler> deviceHandlerList) {
         initializeListOfDevices(deviceHandlerList);
     }
 
