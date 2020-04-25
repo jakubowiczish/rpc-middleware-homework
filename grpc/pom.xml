@@ -24,7 +24,7 @@
 
     <build>
         <finalName>middleware_grpc</finalName>
-        <sourceDirectory>server/src</sourceDirectory>
+        <sourceDirectory>server_grpc/src</sourceDirectory>
 
         <plugins>
             <plugin>
@@ -63,7 +63,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>server/gen</source>
+                                <source>server_grpc/gen</source>
                             </sources>
                         </configuration>
                     </execution>

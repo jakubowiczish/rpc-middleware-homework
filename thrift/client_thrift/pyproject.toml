@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "middleware_thrift_client"
+version = "0.1.0"
+description = ""
+authors = ["jakubowiczish"]
+
+
+[tool.poetry.dependencies]
+python = "3.8.2"
+thrift = "0.13.0"

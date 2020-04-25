@@ -1,4 +1,4 @@
-.idea/*
+.idea/
 /target/
 *.iml
 *.jar
@@ -13,3 +13,4 @@
 */build/*
 */.gradle/*
 *.lst
+pom.properties

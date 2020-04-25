@@ -1,0 +1,1 @@
+..\thrift-0.13.0.exe --gen py ..\smart_home.thrift

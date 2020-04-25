@@ -192,7 +192,10 @@ który po nazwie urządzenia zwracałby jego referencję.
  
 Choć może nie ma to w tym zadaniu uzasadnienia, instancjonowanie serwantów skojarzonych z obiektem middleware powinno nastąpić dopiero w czasie pierwszyego odwołaniu do danego urządzenia (-> ServantLocator).
 
-Realizując komunikację w Thrift należy dążyć do minimalizacji liczby instancji eksponowanych usług (ale bez ekstremizmu - lodówka i bulbulator nie mogą być opisane wspólnym interfejsem!). 
+##### Realizując komunikację w Thrift: 
+
+należy dążyć do minimalizacji liczby instancji eksponowanych usług 
+(ale bez ekstremizmu - lodówka i bulbulator nie mogą być opisane wspólnym interfejsem!). 
 
 ##### Uwagi wspólne (4.1+4.2):
 
