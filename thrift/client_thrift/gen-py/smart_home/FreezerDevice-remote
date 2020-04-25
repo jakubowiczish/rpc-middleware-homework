@@ -16,7 +16,7 @@ else:
 from thrift.transport import TTransport, TSocket, TSSLSocket, THttpClient
 from thrift.protocol.TBinaryProtocol import TBinaryProtocol
 
-from smart_home import FrezerDevice
+from smart_home import FreezerDevice
 from smart_home.ttypes import *
 
 if len(sys.argv) <= 1 or sys.argv[1] == '--help':
@@ -29,7 +29,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('  void increaseFreezing()')
     print('  i32 getPower()')
     print('  void setPower(i32 power)')
-    print('  SwitchMode getCurrentMode()')
+    print('  SwitchMode getOnOffStatus()')
     print('  void turnOn()')
     print('  void turnOff()')
     print('  string getName()')
@@ -110,7 +110,7 @@ else:
     else:
         transport = TTransport.TBufferedTransport(socket)
 protocol = TBinaryProtocol(transport)
-client = FrezerDevice.Client(protocol)
+client = FreezerDevice.Client(protocol)
 transport.open()
 
 if cmd == 'getFreezingMode':
@@ -143,11 +143,11 @@ elif cmd == 'setPower':
         sys.exit(1)
     pp.pprint(client.setPower(eval(args[0]),))
 
-elif cmd == 'getCurrentMode':
+elif cmd == 'getOnOffStatus':
     if len(args) != 0:
-        print('getCurrentMode requires 0 args')
+        print('getOnOffStatus requires 0 args')
         sys.exit(1)
-    pp.pprint(client.getCurrentMode())
+    pp.pprint(client.getOnOffStatus())
 
 elif cmd == 'turnOn':
     if len(args) != 0:

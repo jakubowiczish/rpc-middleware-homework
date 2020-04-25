@@ -48,7 +48,7 @@ service GateDevice extends OpenedClosedDevice {
 }
 
 service SwitchableDevice extends HomeDevice {
-    SwitchMode getCurrentMode(),
+    SwitchMode getOnOffStatus(),
     void turnOn() throws (1: InvalidOperationException e),
     void turnOff() throws (1: InvalidOperationException e)
 }
@@ -64,7 +64,7 @@ service FridgeDevice extends CoolingDevice {
     void setOtherCooling() throws (1: InvalidOperationException e)
 }
 
-service FrezerDevice extends CoolingDevice {
+service FreezerDevice extends CoolingDevice {
     FreezingMode getFreezingMode(),
     void lowerFreezing() throws (1: InvalidOperationException e)
     void increaseFreezing() throws (1: InvalidOperationException e)

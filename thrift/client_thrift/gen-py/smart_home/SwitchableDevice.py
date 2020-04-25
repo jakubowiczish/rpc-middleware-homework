@@ -20,7 +20,7 @@ all_structs = []
 
 
 class Iface(smart_home.HomeDevice.Iface):
-    def getCurrentMode(self):
+    def getOnOffStatus(self):
         pass
 
     def turnOn(self):
@@ -34,18 +34,18 @@ class Client(smart_home.HomeDevice.Client, Iface):
     def __init__(self, iprot, oprot=None):
         smart_home.HomeDevice.Client.__init__(self, iprot, oprot)
 
-    def getCurrentMode(self):
-        self.send_getCurrentMode()
-        return self.recv_getCurrentMode()
+    def getOnOffStatus(self):
+        self.send_getOnOffStatus()
+        return self.recv_getOnOffStatus()
 
-    def send_getCurrentMode(self):
-        self._oprot.writeMessageBegin('getCurrentMode', TMessageType.CALL, self._seqid)
-        args = getCurrentMode_args()
+    def send_getOnOffStatus(self):
+        self._oprot.writeMessageBegin('getOnOffStatus', TMessageType.CALL, self._seqid)
+        args = getOnOffStatus_args()
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
 
-    def recv_getCurrentMode(self):
+    def recv_getOnOffStatus(self):
         iprot = self._iprot
         (fname, mtype, rseqid) = iprot.readMessageBegin()
         if mtype == TMessageType.EXCEPTION:
@@ -53,12 +53,12 @@ class Client(smart_home.HomeDevice.Client, Iface):
             x.read(iprot)
             iprot.readMessageEnd()
             raise x
-        result = getCurrentMode_result()
+        result = getOnOffStatus_result()
         result.read(iprot)
         iprot.readMessageEnd()
         if result.success is not None:
             return result.success
-        raise TApplicationException(TApplicationException.MISSING_RESULT, "getCurrentMode failed: unknown result")
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "getOnOffStatus failed: unknown result")
 
     def turnOn(self):
         self.send_turnOn()
@@ -116,7 +116,7 @@ class Client(smart_home.HomeDevice.Client, Iface):
 class Processor(smart_home.HomeDevice.Processor, Iface, TProcessor):
     def __init__(self, handler):
         smart_home.HomeDevice.Processor.__init__(self, handler)
-        self._processMap["getCurrentMode"] = Processor.process_getCurrentMode
+        self._processMap["getOnOffStatus"] = Processor.process_getOnOffStatus
         self._processMap["turnOn"] = Processor.process_turnOn
         self._processMap["turnOff"] = Processor.process_turnOff
         self._on_message_begin = None
@@ -141,13 +141,13 @@ class Processor(smart_home.HomeDevice.Processor, Iface, TProcessor):
             self._processMap[name](self, seqid, iprot, oprot)
         return True
 
-    def process_getCurrentMode(self, seqid, iprot, oprot):
-        args = getCurrentMode_args()
+    def process_getOnOffStatus(self, seqid, iprot, oprot):
+        args = getOnOffStatus_args()
         args.read(iprot)
         iprot.readMessageEnd()
-        result = getCurrentMode_result()
+        result = getOnOffStatus_result()
         try:
-            result.success = self._handler.getCurrentMode()
+            result.success = self._handler.getOnOffStatus()
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -159,7 +159,7 @@ class Processor(smart_home.HomeDevice.Processor, Iface, TProcessor):
             logging.exception('Unexpected exception in handler')
             msg_type = TMessageType.EXCEPTION
             result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
-        oprot.writeMessageBegin("getCurrentMode", msg_type, seqid)
+        oprot.writeMessageBegin("getOnOffStatus", msg_type, seqid)
         result.write(oprot)
         oprot.writeMessageEnd()
         oprot.trans.flush()
@@ -219,7 +219,7 @@ class Processor(smart_home.HomeDevice.Processor, Iface, TProcessor):
 # HELPER FUNCTIONS AND STRUCTURES
 
 
-class getCurrentMode_args(object):
+class getOnOffStatus_args(object):
 
 
     def read(self, iprot):
@@ -240,7 +240,7 @@ class getCurrentMode_args(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('getCurrentMode_args')
+        oprot.writeStructBegin('getOnOffStatus_args')
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -257,12 +257,12 @@ class getCurrentMode_args(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(getCurrentMode_args)
-getCurrentMode_args.thrift_spec = (
+all_structs.append(getOnOffStatus_args)
+getOnOffStatus_args.thrift_spec = (
 )
 
 
-class getCurrentMode_result(object):
+class getOnOffStatus_result(object):
     """
     Attributes:
      - success
@@ -296,7 +296,7 @@ class getCurrentMode_result(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('getCurrentMode_result')
+        oprot.writeStructBegin('getOnOffStatus_result')
         if self.success is not None:
             oprot.writeFieldBegin('success', TType.I32, 0)
             oprot.writeI32(self.success)
@@ -317,8 +317,8 @@ class getCurrentMode_result(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(getCurrentMode_result)
-getCurrentMode_result.thrift_spec = (
+all_structs.append(getOnOffStatus_result)
+getOnOffStatus_result.thrift_spec = (
     (0, TType.I32, 'success', None, None, ),  # 0
 )
 

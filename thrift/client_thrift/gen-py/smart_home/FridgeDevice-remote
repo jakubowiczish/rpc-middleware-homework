@@ -29,7 +29,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('  void setOtherCooling()')
     print('  i32 getPower()')
     print('  void setPower(i32 power)')
-    print('  SwitchMode getCurrentMode()')
+    print('  SwitchMode getOnOffStatus()')
     print('  void turnOn()')
     print('  void turnOff()')
     print('  string getName()')
@@ -143,11 +143,11 @@ elif cmd == 'setPower':
         sys.exit(1)
     pp.pprint(client.setPower(eval(args[0]),))
 
-elif cmd == 'getCurrentMode':
+elif cmd == 'getOnOffStatus':
     if len(args) != 0:
-        print('getCurrentMode requires 0 args')
+        print('getOnOffStatus requires 0 args')
         sys.exit(1)
-    pp.pprint(client.getCurrentMode())
+    pp.pprint(client.getOnOffStatus())
 
 elif cmd == 'turnOn':
     if len(args) != 0:

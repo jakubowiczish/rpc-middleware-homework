@@ -39,7 +39,7 @@ transport.open()
 transport_protocol = create_transport_protocol(transport)
 
 gate = GateDevice.Client(get_device_protocol(transport_protocol, "GATE_IDENTIFIER"))
-freezer = FrezerDevice.Client(get_device_protocol(transport_protocol, "FREEZER_IDENTIFIER"))
+freezer = FreezerDevice.Client(get_device_protocol(transport_protocol, "FREEZER_IDENTIFIER"))
 
 
 def execute_given_command(command):
@@ -60,6 +60,15 @@ def execute_given_command(command):
         return True
     elif command == "set gate non auto":
         gate.setNotAutomatic()
+        return True
+    elif command == "turn on freezer":
+        freezer.turnOn()
+        return True
+    elif command == "turn off freezer":
+        freezer.turnOff()
+        return True
+    elif command == "get freezer state":
+        print(freezer.getOnOffStatus())
         return True
     elif command == "set freezer power":
         power = input("Choose power level (from 0 to 100)")

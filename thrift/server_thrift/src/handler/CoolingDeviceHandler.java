@@ -28,11 +28,14 @@ public class CoolingDeviceHandler extends SwitchableDeviceHandler implements Coo
 
     @Override
     public synchronized int getPower() throws TException {
+        throwIfOffAndRequested();
         return this.power.get();
     }
 
     @Override
     public synchronized void setPower(int power) throws InvalidArgumentsException, TException {
+        throwIfOffAndRequested();
+
         printlnColoured("Server has received a request to set the power level of the device", ConsoleColor.YELLOW_BOLD);
 
         if (isPowerValueIncorrect(power))
