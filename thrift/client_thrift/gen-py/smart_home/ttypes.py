@@ -62,17 +62,26 @@ class FreezingMode(object):
 
 
 class FoodCoolingMode(object):
-    MEAT = 1
-    OTHERS = 2
+    REGULAR = 1
+    ENERGY_SAVING = 2
+    VACATION = 3
+    MAX = 4
+    MIN = 5
 
     _VALUES_TO_NAMES = {
-        1: "MEAT",
-        2: "OTHERS",
+        1: "REGULAR",
+        2: "ENERGY_SAVING",
+        3: "VACATION",
+        4: "MAX",
+        5: "MIN",
     }
 
     _NAMES_TO_VALUES = {
-        "MEAT": 1,
-        "OTHERS": 2,
+        "REGULAR": 1,
+        "ENERGY_SAVING": 2,
+        "VACATION": 3,
+        "MAX": 4,
+        "MIN": 5,
     }
 
 

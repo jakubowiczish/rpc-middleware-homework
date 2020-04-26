@@ -23,10 +23,12 @@ class Iface(smart_home.CoolingDevice.Iface):
     def getFoodCoolingMode(self):
         pass
 
-    def setCoolingForMeat(self):
-        pass
+    def setCoolingMode(self, foodCoolingMode):
+        """
+        Parameters:
+         - foodCoolingMode
 
-    def setOtherCooling(self):
+        """
         pass
 
 
@@ -60,18 +62,24 @@ class Client(smart_home.CoolingDevice.Client, Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "getFoodCoolingMode failed: unknown result")
 
-    def setCoolingForMeat(self):
-        self.send_setCoolingForMeat()
-        self.recv_setCoolingForMeat()
+    def setCoolingMode(self, foodCoolingMode):
+        """
+        Parameters:
+         - foodCoolingMode
 
-    def send_setCoolingForMeat(self):
-        self._oprot.writeMessageBegin('setCoolingForMeat', TMessageType.CALL, self._seqid)
-        args = setCoolingForMeat_args()
+        """
+        self.send_setCoolingMode(foodCoolingMode)
+        self.recv_setCoolingMode()
+
+    def send_setCoolingMode(self, foodCoolingMode):
+        self._oprot.writeMessageBegin('setCoolingMode', TMessageType.CALL, self._seqid)
+        args = setCoolingMode_args()
+        args.foodCoolingMode = foodCoolingMode
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
 
-    def recv_setCoolingForMeat(self):
+    def recv_setCoolingMode(self):
         iprot = self._iprot
         (fname, mtype, rseqid) = iprot.readMessageBegin()
         if mtype == TMessageType.EXCEPTION:
@@ -79,37 +87,9 @@ class Client(smart_home.CoolingDevice.Client, Iface):
             x.read(iprot)
             iprot.readMessageEnd()
             raise x
-        result = setCoolingForMeat_result()
+        result = setCoolingMode_result()
         result.read(iprot)
         iprot.readMessageEnd()
-        if result.e is not None:
-            raise result.e
-        return
-
-    def setOtherCooling(self):
-        self.send_setOtherCooling()
-        self.recv_setOtherCooling()
-
-    def send_setOtherCooling(self):
-        self._oprot.writeMessageBegin('setOtherCooling', TMessageType.CALL, self._seqid)
-        args = setOtherCooling_args()
-        args.write(self._oprot)
-        self._oprot.writeMessageEnd()
-        self._oprot.trans.flush()
-
-    def recv_setOtherCooling(self):
-        iprot = self._iprot
-        (fname, mtype, rseqid) = iprot.readMessageBegin()
-        if mtype == TMessageType.EXCEPTION:
-            x = TApplicationException()
-            x.read(iprot)
-            iprot.readMessageEnd()
-            raise x
-        result = setOtherCooling_result()
-        result.read(iprot)
-        iprot.readMessageEnd()
-        if result.e is not None:
-            raise result.e
         return
 
 
@@ -117,8 +97,7 @@ class Processor(smart_home.CoolingDevice.Processor, Iface, TProcessor):
     def __init__(self, handler):
         smart_home.CoolingDevice.Processor.__init__(self, handler)
         self._processMap["getFoodCoolingMode"] = Processor.process_getFoodCoolingMode
-        self._processMap["setCoolingForMeat"] = Processor.process_setCoolingForMeat
-        self._processMap["setOtherCooling"] = Processor.process_setOtherCooling
+        self._processMap["setCoolingMode"] = Processor.process_setCoolingMode
         self._on_message_begin = None
 
     def on_message_begin(self, func):
@@ -164,19 +143,16 @@ class Processor(smart_home.CoolingDevice.Processor, Iface, TProcessor):
         oprot.writeMessageEnd()
         oprot.trans.flush()
 
-    def process_setCoolingForMeat(self, seqid, iprot, oprot):
-        args = setCoolingForMeat_args()
+    def process_setCoolingMode(self, seqid, iprot, oprot):
+        args = setCoolingMode_args()
         args.read(iprot)
         iprot.readMessageEnd()
-        result = setCoolingForMeat_result()
+        result = setCoolingMode_result()
         try:
-            self._handler.setCoolingForMeat()
+            self._handler.setCoolingMode(args.foodCoolingMode)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
-        except InvalidOperationException as e:
-            msg_type = TMessageType.REPLY
-            result.e = e
         except TApplicationException as ex:
             logging.exception('TApplication exception in handler')
             msg_type = TMessageType.EXCEPTION
@@ -185,33 +161,7 @@ class Processor(smart_home.CoolingDevice.Processor, Iface, TProcessor):
             logging.exception('Unexpected exception in handler')
             msg_type = TMessageType.EXCEPTION
             result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
-        oprot.writeMessageBegin("setCoolingForMeat", msg_type, seqid)
-        result.write(oprot)
-        oprot.writeMessageEnd()
-        oprot.trans.flush()
-
-    def process_setOtherCooling(self, seqid, iprot, oprot):
-        args = setOtherCooling_args()
-        args.read(iprot)
-        iprot.readMessageEnd()
-        result = setOtherCooling_result()
-        try:
-            self._handler.setOtherCooling()
-            msg_type = TMessageType.REPLY
-        except TTransport.TTransportException:
-            raise
-        except InvalidOperationException as e:
-            msg_type = TMessageType.REPLY
-            result.e = e
-        except TApplicationException as ex:
-            logging.exception('TApplication exception in handler')
-            msg_type = TMessageType.EXCEPTION
-            result = ex
-        except Exception:
-            logging.exception('Unexpected exception in handler')
-            msg_type = TMessageType.EXCEPTION
-            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
-        oprot.writeMessageBegin("setOtherCooling", msg_type, seqid)
+        oprot.writeMessageBegin("setCoolingMode", msg_type, seqid)
         result.write(oprot)
         oprot.writeMessageEnd()
         oprot.trans.flush()
@@ -323,59 +273,16 @@ getFoodCoolingMode_result.thrift_spec = (
 )
 
 
-class setCoolingForMeat_args(object):
-
-
-    def read(self, iprot):
-        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
-            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
-            return
-        iprot.readStructBegin()
-        while True:
-            (fname, ftype, fid) = iprot.readFieldBegin()
-            if ftype == TType.STOP:
-                break
-            else:
-                iprot.skip(ftype)
-            iprot.readFieldEnd()
-        iprot.readStructEnd()
-
-    def write(self, oprot):
-        if oprot._fast_encode is not None and self.thrift_spec is not None:
-            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
-            return
-        oprot.writeStructBegin('setCoolingForMeat_args')
-        oprot.writeFieldStop()
-        oprot.writeStructEnd()
-
-    def validate(self):
-        return
-
-    def __repr__(self):
-        L = ['%s=%r' % (key, value)
-             for key, value in self.__dict__.items()]
-        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
-
-    def __eq__(self, other):
-        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
-
-    def __ne__(self, other):
-        return not (self == other)
-all_structs.append(setCoolingForMeat_args)
-setCoolingForMeat_args.thrift_spec = (
-)
-
-
-class setCoolingForMeat_result(object):
+class setCoolingMode_args(object):
     """
     Attributes:
-     - e
+     - foodCoolingMode
 
     """
 
 
-    def __init__(self, e=None,):
-        self.e = e
+    def __init__(self, foodCoolingMode=None,):
+        self.foodCoolingMode = foodCoolingMode
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -387,9 +294,8 @@ class setCoolingForMeat_result(object):
             if ftype == TType.STOP:
                 break
             if fid == 1:
-                if ftype == TType.STRUCT:
-                    self.e = InvalidOperationException()
-                    self.e.read(iprot)
+                if ftype == TType.I32:
+                    self.foodCoolingMode = iprot.readI32()
                 else:
                     iprot.skip(ftype)
             else:
@@ -401,10 +307,10 @@ class setCoolingForMeat_result(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('setCoolingForMeat_result')
-        if self.e is not None:
-            oprot.writeFieldBegin('e', TType.STRUCT, 1)
-            self.e.write(oprot)
+        oprot.writeStructBegin('setCoolingMode_args')
+        if self.foodCoolingMode is not None:
+            oprot.writeFieldBegin('foodCoolingMode', TType.I32, 1)
+            oprot.writeI32(self.foodCoolingMode)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -422,14 +328,14 @@ class setCoolingForMeat_result(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(setCoolingForMeat_result)
-setCoolingForMeat_result.thrift_spec = (
+all_structs.append(setCoolingMode_args)
+setCoolingMode_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'e', [InvalidOperationException, None], None, ),  # 1
+    (1, TType.I32, 'foodCoolingMode', None, None, ),  # 1
 )
 
 
-class setOtherCooling_args(object):
+class setCoolingMode_result(object):
 
 
     def read(self, iprot):
@@ -450,7 +356,7 @@ class setOtherCooling_args(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('setOtherCooling_args')
+        oprot.writeStructBegin('setCoolingMode_result')
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -467,71 +373,8 @@ class setOtherCooling_args(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(setOtherCooling_args)
-setOtherCooling_args.thrift_spec = (
-)
-
-
-class setOtherCooling_result(object):
-    """
-    Attributes:
-     - e
-
-    """
-
-
-    def __init__(self, e=None,):
-        self.e = e
-
-    def read(self, iprot):
-        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
-            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
-            return
-        iprot.readStructBegin()
-        while True:
-            (fname, ftype, fid) = iprot.readFieldBegin()
-            if ftype == TType.STOP:
-                break
-            if fid == 1:
-                if ftype == TType.STRUCT:
-                    self.e = InvalidOperationException()
-                    self.e.read(iprot)
-                else:
-                    iprot.skip(ftype)
-            else:
-                iprot.skip(ftype)
-            iprot.readFieldEnd()
-        iprot.readStructEnd()
-
-    def write(self, oprot):
-        if oprot._fast_encode is not None and self.thrift_spec is not None:
-            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
-            return
-        oprot.writeStructBegin('setOtherCooling_result')
-        if self.e is not None:
-            oprot.writeFieldBegin('e', TType.STRUCT, 1)
-            self.e.write(oprot)
-            oprot.writeFieldEnd()
-        oprot.writeFieldStop()
-        oprot.writeStructEnd()
-
-    def validate(self):
-        return
-
-    def __repr__(self):
-        L = ['%s=%r' % (key, value)
-             for key, value in self.__dict__.items()]
-        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
-
-    def __eq__(self, other):
-        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
-
-    def __ne__(self, other):
-        return not (self == other)
-all_structs.append(setOtherCooling_result)
-setOtherCooling_result.thrift_spec = (
-    None,  # 0
-    (1, TType.STRUCT, 'e', [InvalidOperationException, None], None, ),  # 1
+all_structs.append(setCoolingMode_result)
+setCoolingMode_result.thrift_spec = (
 )
 fix_spec(all_structs)
 del all_structs

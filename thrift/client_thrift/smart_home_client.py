@@ -22,6 +22,15 @@ def get_device_protocol(transport_protocol_arg, identifier):
     return TMultiplexedProtocol.TMultiplexedProtocol(transport_protocol_arg, identifier)
 
 
+transport = create_buffered_transport()
+transport.open()
+transport_protocol = create_transport_protocol(transport)
+
+gate = GateDevice.Client(get_device_protocol(transport_protocol, "GATE_IDENTIFIER"))
+freezer = FreezerDevice.Client(get_device_protocol(transport_protocol, "FREEZER_IDENTIFIER"))
+fridge = FridgeDevice.Client(get_device_protocol(transport_protocol, "FRIDGE_IDENTIFIER"))
+
+
 def get_list_of_all_available_devices(transport_protocol_arg):
     return DevicesList.Client(
         get_device_protocol(transport_protocol_arg, "all")
@@ -32,54 +41,131 @@ def print_all_available_devices():
     all_available_devices = get_list_of_all_available_devices(transport_protocol)
     for x in all_available_devices:
         print(x)
+    return True
 
 
-transport = create_buffered_transport()
-transport.open()
-transport_protocol = create_transport_protocol(transport)
+def open_gate():
+    gate.open()
+    return True
 
-gate = GateDevice.Client(get_device_protocol(transport_protocol, "GATE_IDENTIFIER"))
-freezer = FreezerDevice.Client(get_device_protocol(transport_protocol, "FREEZER_IDENTIFIER"))
+
+def close_gate():
+    gate.close()
+    return True
+
+
+def get_gate_mode():
+    print(gate.getOpenClosedMode())
+    return True
+
+
+def set_gate_auto():
+    gate.setAutomatic()
+    return True
+
+
+def set_gate_not_auto():
+    gate.setNotAutomatic()
+    return True
+
+
+def get_gate_auto_status():
+    print(gate.isAutomatic())
+    return True
+
+
+def turn_on_freezer():
+    freezer.turnOn()
+    return True
+
+
+def turn_off_freezer():
+    freezer.turnOff()
+    return True
+
+
+def get_freezer_on_off_status():
+    print(freezer.getOnOffStatus())
+    return True
+
+
+def get_freezer_power():
+    print(freezer.getPower())
+    return True
+
+
+def set_freezer_power():
+    power = input("Choose power level (from 0 to 100)")
+    freezer.setPower(int(power))
+    return True
+
+
+def lower_freezing():
+    freezer.lowerFreezing()
+    return True
+
+
+def increase_freezing():
+    freezer.increaseFreezing()
+    return True
+
+
+def turn_on_fridge():
+    fridge.turnOn()
+    return True
+
+
+def turn_off_fridge():
+    fridge.turnOff()
+    return True
+
+
+def get_cooling_mode():
+    print(fridge.getFoodCoolingMode())
+    return True
+
+
+def set_cooling_mode():
+    for x in FoodCoolingMode._VALUES_TO_NAMES:
+        print(x)
+
+    fridge.setCoolingMode(FoodCoolingMode.MAX)
+    return True
+
+
+def print_help():
+    for x in commands:
+        print("> " + x[0])
+    return True
+
+
+commands = [
+    ("help", print_help),
+    ("list", print_all_available_devices),
+    ("open gate", open_gate),
+    ("close gate", close_gate),
+    ("set gate auto", set_gate_auto),
+    ("get gate mode", get_gate_mode),
+    ("set gate not auto", set_gate_not_auto),
+    ("get gate auto status", get_gate_auto_status),
+    ("turn on freezer", turn_on_freezer),
+    ("turn off freezer", turn_off_freezer),
+    ("get freezer on off status", get_freezer_on_off_status),
+    ("set freezer power", set_freezer_power),
+    ("get freezer power", get_freezer_power),
+    ("lower freezing", lower_freezing),
+    ("increase freezing", increase_freezing),
+    ("turn on fridge", turn_on_fridge),
+    ("turn off fridge", turn_off_fridge),
+    ("get cooling mode", get_cooling_mode),
+    ("set cooling mode", set_cooling_mode),
+]
 
 
 def execute_given_command(command):
-    if command == "list":
-        print_all_available_devices()
-        return True
-    elif command == "open gate":
-        gate.open()
-        return True
-    elif command == "close gate":
-        gate.close()
-        return True
-    elif command == "get gate mode":
-        print(gate.getOpenClosedMode())
-        return True
-    elif command == "set gate auto":
-        gate.setAutomatic()
-        return True
-    elif command == "set gate non auto":
-        gate.setNotAutomatic()
-        return True
-    elif command == "turn on freezer":
-        freezer.turnOn()
-        return True
-    elif command == "turn off freezer":
-        freezer.turnOff()
-        return True
-    elif command == "get freezer state":
-        print(freezer.getOnOffStatus())
-        return True
-    elif command == "set freezer power":
-        power = input("Choose power level (from 0 to 100)")
-        freezer.setPower(power)
-        return True
-    elif command == "lower freezing":
-        freezer.lowerFreezing()
-        return True
-    elif command == "increase freezing":
-        freezer.increaseFreezing()
-        return True
+    for x in commands:
+        if command == str(x[0]):
+            return x[1]()
     return False
 
 

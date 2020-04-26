@@ -26,8 +26,11 @@ enum FreezingMode {
 }
 
 enum FoodCoolingMode {
-    MEAT = 1,
-    OTHERS = 2
+    REGULAR = 1,
+    ENERGY_SAVING = 2,
+    VACATION = 3,
+    MAX = 4,
+    MIN = 5
 }
 
 service HomeDevice {
@@ -60,8 +63,7 @@ service CoolingDevice extends SwitchableDevice {
 
 service FridgeDevice extends CoolingDevice {
     FoodCoolingMode getFoodCoolingMode(),
-    void setCoolingForMeat() throws (1: InvalidOperationException e),
-    void setOtherCooling() throws (1: InvalidOperationException e)
+    void setCoolingMode(1: FoodCoolingMode foodCoolingMode)
 }
 
 service FreezerDevice extends CoolingDevice {

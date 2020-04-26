@@ -14,9 +14,7 @@ public class FridgeDevice {
 
     public FoodCoolingMode getFoodCoolingMode() throws org.apache.thrift.TException;
 
-    public void setCoolingForMeat() throws InvalidOperationException, org.apache.thrift.TException;
-
-    public void setOtherCooling() throws InvalidOperationException, org.apache.thrift.TException;
+    public void setCoolingMode(FoodCoolingMode foodCoolingMode) throws org.apache.thrift.TException;
 
   }
 
@@ -24,9 +22,7 @@ public class FridgeDevice {
 
     public void getFoodCoolingMode(org.apache.thrift.async.AsyncMethodCallback<FoodCoolingMode> resultHandler) throws org.apache.thrift.TException;
 
-    public void setCoolingForMeat(org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
-
-    public void setOtherCooling(org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+    public void setCoolingMode(FoodCoolingMode foodCoolingMode, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -72,47 +68,23 @@ public class FridgeDevice {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getFoodCoolingMode failed: unknown result");
     }
 
-    public void setCoolingForMeat() throws InvalidOperationException, org.apache.thrift.TException
+    public void setCoolingMode(FoodCoolingMode foodCoolingMode) throws org.apache.thrift.TException
     {
-      send_setCoolingForMeat();
-      recv_setCoolingForMeat();
+      send_setCoolingMode(foodCoolingMode);
+      recv_setCoolingMode();
     }
 
-    public void send_setCoolingForMeat() throws org.apache.thrift.TException
+    public void send_setCoolingMode(FoodCoolingMode foodCoolingMode) throws org.apache.thrift.TException
     {
-      setCoolingForMeat_args args = new setCoolingForMeat_args();
-      sendBase("setCoolingForMeat", args);
+      setCoolingMode_args args = new setCoolingMode_args();
+      args.setFoodCoolingMode(foodCoolingMode);
+      sendBase("setCoolingMode", args);
     }
 
-    public void recv_setCoolingForMeat() throws InvalidOperationException, org.apache.thrift.TException
+    public void recv_setCoolingMode() throws org.apache.thrift.TException
     {
-      setCoolingForMeat_result result = new setCoolingForMeat_result();
-      receiveBase(result, "setCoolingForMeat");
-      if (result.e != null) {
-        throw result.e;
-      }
-      return;
-    }
-
-    public void setOtherCooling() throws InvalidOperationException, org.apache.thrift.TException
-    {
-      send_setOtherCooling();
-      recv_setOtherCooling();
-    }
-
-    public void send_setOtherCooling() throws org.apache.thrift.TException
-    {
-      setOtherCooling_args args = new setOtherCooling_args();
-      sendBase("setOtherCooling", args);
-    }
-
-    public void recv_setOtherCooling() throws InvalidOperationException, org.apache.thrift.TException
-    {
-      setOtherCooling_result result = new setOtherCooling_result();
-      receiveBase(result, "setOtherCooling");
-      if (result.e != null) {
-        throw result.e;
-      }
+      setCoolingMode_result result = new setCoolingMode_result();
+      receiveBase(result, "setCoolingMode");
       return;
     }
 
@@ -163,55 +135,29 @@ public class FridgeDevice {
       }
     }
 
-    public void setCoolingForMeat(org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+    public void setCoolingMode(FoodCoolingMode foodCoolingMode, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      setCoolingForMeat_call method_call = new setCoolingForMeat_call(resultHandler, this, ___protocolFactory, ___transport);
+      setCoolingMode_call method_call = new setCoolingMode_call(foodCoolingMode, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class setCoolingForMeat_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
-      public setCoolingForMeat_call(org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class setCoolingMode_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
+      private FoodCoolingMode foodCoolingMode;
+      public setCoolingMode_call(FoodCoolingMode foodCoolingMode, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.foodCoolingMode = foodCoolingMode;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("setCoolingForMeat", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        setCoolingForMeat_args args = new setCoolingForMeat_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("setCoolingMode", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        setCoolingMode_args args = new setCoolingMode_args();
+        args.setFoodCoolingMode(foodCoolingMode);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public Void getResult() throws InvalidOperationException, org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
-          throw new java.lang.IllegalStateException("Method call not finished!");
-        }
-        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
-        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return null;
-      }
-    }
-
-    public void setOtherCooling(org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
-      checkReady();
-      setOtherCooling_call method_call = new setOtherCooling_call(resultHandler, this, ___protocolFactory, ___transport);
-      this.___currentMethod = method_call;
-      ___manager.call(method_call);
-    }
-
-    public static class setOtherCooling_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
-      public setOtherCooling_call(org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
-        super(client, protocolFactory, transport, resultHandler, false);
-      }
-
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("setOtherCooling", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        setOtherCooling_args args = new setOtherCooling_args();
-        args.write(prot);
-        prot.writeMessageEnd();
-      }
-
-      public Void getResult() throws InvalidOperationException, org.apache.thrift.TException {
+      public Void getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -235,8 +181,7 @@ public class FridgeDevice {
 
     private static <I extends Iface> java.util.Map<java.lang.String,  org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase>> getProcessMap(java.util.Map<java.lang.String, org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
       processMap.put("getFoodCoolingMode", new getFoodCoolingMode());
-      processMap.put("setCoolingForMeat", new setCoolingForMeat());
-      processMap.put("setOtherCooling", new setOtherCooling());
+      processMap.put("setCoolingMode", new setCoolingMode());
       return processMap;
     }
 
@@ -265,42 +210,13 @@ public class FridgeDevice {
       }
     }
 
-    public static class setCoolingForMeat<I extends Iface> extends org.apache.thrift.ProcessFunction<I, setCoolingForMeat_args> {
-      public setCoolingForMeat() {
-        super("setCoolingForMeat");
+    public static class setCoolingMode<I extends Iface> extends org.apache.thrift.ProcessFunction<I, setCoolingMode_args> {
+      public setCoolingMode() {
+        super("setCoolingMode");
       }
 
-      public setCoolingForMeat_args getEmptyArgsInstance() {
-        return new setCoolingForMeat_args();
-      }
-
-      protected boolean isOneway() {
-        return false;
-      }
-
-      @Override
-      protected boolean rethrowUnhandledExceptions() {
-        return false;
-      }
-
-      public setCoolingForMeat_result getResult(I iface, setCoolingForMeat_args args) throws org.apache.thrift.TException {
-        setCoolingForMeat_result result = new setCoolingForMeat_result();
-        try {
-          iface.setCoolingForMeat();
-        } catch (InvalidOperationException e) {
-          result.e = e;
-        }
-        return result;
-      }
-    }
-
-    public static class setOtherCooling<I extends Iface> extends org.apache.thrift.ProcessFunction<I, setOtherCooling_args> {
-      public setOtherCooling() {
-        super("setOtherCooling");
-      }
-
-      public setOtherCooling_args getEmptyArgsInstance() {
-        return new setOtherCooling_args();
+      public setCoolingMode_args getEmptyArgsInstance() {
+        return new setCoolingMode_args();
       }
 
       protected boolean isOneway() {
@@ -312,13 +228,9 @@ public class FridgeDevice {
         return false;
       }
 
-      public setOtherCooling_result getResult(I iface, setOtherCooling_args args) throws org.apache.thrift.TException {
-        setOtherCooling_result result = new setOtherCooling_result();
-        try {
-          iface.setOtherCooling();
-        } catch (InvalidOperationException e) {
-          result.e = e;
-        }
+      public setCoolingMode_result getResult(I iface, setCoolingMode_args args) throws org.apache.thrift.TException {
+        setCoolingMode_result result = new setCoolingMode_result();
+        iface.setCoolingMode(args.foodCoolingMode);
         return result;
       }
     }
@@ -337,8 +249,7 @@ public class FridgeDevice {
 
     private static <I extends AsyncIface> java.util.Map<java.lang.String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase,?>> getProcessMap(java.util.Map<java.lang.String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
       processMap.put("getFoodCoolingMode", new getFoodCoolingMode());
-      processMap.put("setCoolingForMeat", new setCoolingForMeat());
-      processMap.put("setOtherCooling", new setOtherCooling());
+      processMap.put("setCoolingMode", new setCoolingMode());
       return processMap;
     }
 
@@ -403,20 +314,20 @@ public class FridgeDevice {
       }
     }
 
-    public static class setCoolingForMeat<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, setCoolingForMeat_args, Void> {
-      public setCoolingForMeat() {
-        super("setCoolingForMeat");
+    public static class setCoolingMode<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, setCoolingMode_args, Void> {
+      public setCoolingMode() {
+        super("setCoolingMode");
       }
 
-      public setCoolingForMeat_args getEmptyArgsInstance() {
-        return new setCoolingForMeat_args();
+      public setCoolingMode_args getEmptyArgsInstance() {
+        return new setCoolingMode_args();
       }
 
       public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            setCoolingForMeat_result result = new setCoolingForMeat_result();
+            setCoolingMode_result result = new setCoolingMode_result();
             try {
               fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
             } catch (org.apache.thrift.transport.TTransportException e) {
@@ -430,12 +341,8 @@ public class FridgeDevice {
           public void onError(java.lang.Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TSerializable msg;
-            setCoolingForMeat_result result = new setCoolingForMeat_result();
-            if (e instanceof InvalidOperationException) {
-              result.e = (InvalidOperationException) e;
-              result.setEIsSet(true);
-              msg = result;
-            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
+            setCoolingMode_result result = new setCoolingMode_result();
+            if (e instanceof org.apache.thrift.transport.TTransportException) {
               _LOGGER.error("TTransportException inside handler", e);
               fb.close();
               return;
@@ -462,72 +369,8 @@ public class FridgeDevice {
         return false;
       }
 
-      public void start(I iface, setCoolingForMeat_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
-        iface.setCoolingForMeat(resultHandler);
-      }
-    }
-
-    public static class setOtherCooling<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, setOtherCooling_args, Void> {
-      public setOtherCooling() {
-        super("setOtherCooling");
-      }
-
-      public setOtherCooling_args getEmptyArgsInstance() {
-        return new setOtherCooling_args();
-      }
-
-      public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
-        final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
-          public void onComplete(Void o) {
-            setOtherCooling_result result = new setOtherCooling_result();
-            try {
-              fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
-            } catch (org.apache.thrift.transport.TTransportException e) {
-              _LOGGER.error("TTransportException writing to internal frame buffer", e);
-              fb.close();
-            } catch (java.lang.Exception e) {
-              _LOGGER.error("Exception writing to internal frame buffer", e);
-              onError(e);
-            }
-          }
-          public void onError(java.lang.Exception e) {
-            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
-            org.apache.thrift.TSerializable msg;
-            setOtherCooling_result result = new setOtherCooling_result();
-            if (e instanceof InvalidOperationException) {
-              result.e = (InvalidOperationException) e;
-              result.setEIsSet(true);
-              msg = result;
-            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
-              _LOGGER.error("TTransportException inside handler", e);
-              fb.close();
-              return;
-            } else if (e instanceof org.apache.thrift.TApplicationException) {
-              _LOGGER.error("TApplicationException inside handler", e);
-              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
-              msg = (org.apache.thrift.TApplicationException)e;
-            } else {
-              _LOGGER.error("Exception inside handler", e);
-              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
-              msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
-            }
-            try {
-              fcall.sendResponse(fb,msg,msgType,seqid);
-            } catch (java.lang.Exception ex) {
-              _LOGGER.error("Exception writing to internal frame buffer", ex);
-              fb.close();
-            }
-          }
-        };
-      }
-
-      protected boolean isOneway() {
-        return false;
-      }
-
-      public void start(I iface, setOtherCooling_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
-        iface.setOtherCooling(resultHandler);
+      public void start(I iface, setCoolingMode_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+        iface.setCoolingMode(args.foodCoolingMode,resultHandler);
       }
     }
 
@@ -1170,12 +1013,395 @@ public class FridgeDevice {
     }
   }
 
-  public static class setCoolingForMeat_args implements org.apache.thrift.TBase<setCoolingForMeat_args, setCoolingForMeat_args._Fields>, java.io.Serializable, Cloneable, Comparable<setCoolingForMeat_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setCoolingForMeat_args");
+  public static class setCoolingMode_args implements org.apache.thrift.TBase<setCoolingMode_args, setCoolingMode_args._Fields>, java.io.Serializable, Cloneable, Comparable<setCoolingMode_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setCoolingMode_args");
+
+    private static final org.apache.thrift.protocol.TField FOOD_COOLING_MODE_FIELD_DESC = new org.apache.thrift.protocol.TField("foodCoolingMode", org.apache.thrift.protocol.TType.I32, (short)1);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new setCoolingMode_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new setCoolingMode_argsTupleSchemeFactory();
+
+    /**
+     * 
+     * @see FoodCoolingMode
+     */
+    public @org.apache.thrift.annotation.Nullable FoodCoolingMode foodCoolingMode; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      /**
+       * 
+       * @see FoodCoolingMode
+       */
+      FOOD_COOLING_MODE((short)1, "foodCoolingMode");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // FOOD_COOLING_MODE
+            return FOOD_COOLING_MODE;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.FOOD_COOLING_MODE, new org.apache.thrift.meta_data.FieldMetaData("foodCoolingMode", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, FoodCoolingMode.class)));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setCoolingMode_args.class, metaDataMap);
+    }
+
+    public setCoolingMode_args() {
+    }
+
+    public setCoolingMode_args(
+      FoodCoolingMode foodCoolingMode)
+    {
+      this();
+      this.foodCoolingMode = foodCoolingMode;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public setCoolingMode_args(setCoolingMode_args other) {
+      if (other.isSetFoodCoolingMode()) {
+        this.foodCoolingMode = other.foodCoolingMode;
+      }
+    }
+
+    public setCoolingMode_args deepCopy() {
+      return new setCoolingMode_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.foodCoolingMode = null;
+    }
+
+    /**
+     * 
+     * @see FoodCoolingMode
+     */
+    @org.apache.thrift.annotation.Nullable
+    public FoodCoolingMode getFoodCoolingMode() {
+      return this.foodCoolingMode;
+    }
+
+    /**
+     * 
+     * @see FoodCoolingMode
+     */
+    public setCoolingMode_args setFoodCoolingMode(@org.apache.thrift.annotation.Nullable FoodCoolingMode foodCoolingMode) {
+      this.foodCoolingMode = foodCoolingMode;
+      return this;
+    }
+
+    public void unsetFoodCoolingMode() {
+      this.foodCoolingMode = null;
+    }
+
+    /** Returns true if field foodCoolingMode is set (has been assigned a value) and false otherwise */
+    public boolean isSetFoodCoolingMode() {
+      return this.foodCoolingMode != null;
+    }
+
+    public void setFoodCoolingModeIsSet(boolean value) {
+      if (!value) {
+        this.foodCoolingMode = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      case FOOD_COOLING_MODE:
+        if (value == null) {
+          unsetFoodCoolingMode();
+        } else {
+          setFoodCoolingMode((FoodCoolingMode)value);
+        }
+        break;
+
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case FOOD_COOLING_MODE:
+        return getFoodCoolingMode();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case FOOD_COOLING_MODE:
+        return isSetFoodCoolingMode();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof setCoolingMode_args)
+        return this.equals((setCoolingMode_args)that);
+      return false;
+    }
+
+    public boolean equals(setCoolingMode_args that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_foodCoolingMode = true && this.isSetFoodCoolingMode();
+      boolean that_present_foodCoolingMode = true && that.isSetFoodCoolingMode();
+      if (this_present_foodCoolingMode || that_present_foodCoolingMode) {
+        if (!(this_present_foodCoolingMode && that_present_foodCoolingMode))
+          return false;
+        if (!this.foodCoolingMode.equals(that.foodCoolingMode))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetFoodCoolingMode()) ? 131071 : 524287);
+      if (isSetFoodCoolingMode())
+        hashCode = hashCode * 8191 + foodCoolingMode.getValue();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(setCoolingMode_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetFoodCoolingMode()).compareTo(other.isSetFoodCoolingMode());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFoodCoolingMode()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.foodCoolingMode, other.foodCoolingMode);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+    }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("setCoolingMode_args(");
+      boolean first = true;
+
+      sb.append("foodCoolingMode:");
+      if (this.foodCoolingMode == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.foodCoolingMode);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class setCoolingMode_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public setCoolingMode_argsStandardScheme getScheme() {
+        return new setCoolingMode_argsStandardScheme();
+      }
+    }
+
+    private static class setCoolingMode_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<setCoolingMode_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setCoolingMode_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // FOOD_COOLING_MODE
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.foodCoolingMode = sr.rpc.thrift.FoodCoolingMode.findByValue(iprot.readI32());
+                struct.setFoodCoolingModeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setCoolingMode_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.foodCoolingMode != null) {
+          oprot.writeFieldBegin(FOOD_COOLING_MODE_FIELD_DESC);
+          oprot.writeI32(struct.foodCoolingMode.getValue());
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class setCoolingMode_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public setCoolingMode_argsTupleScheme getScheme() {
+        return new setCoolingMode_argsTupleScheme();
+      }
+    }
+
+    private static class setCoolingMode_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<setCoolingMode_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, setCoolingMode_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetFoodCoolingMode()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetFoodCoolingMode()) {
+          oprot.writeI32(struct.foodCoolingMode.getValue());
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, setCoolingMode_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.foodCoolingMode = sr.rpc.thrift.FoodCoolingMode.findByValue(iprot.readI32());
+          struct.setFoodCoolingModeIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class setCoolingMode_result implements org.apache.thrift.TBase<setCoolingMode_result, setCoolingMode_result._Fields>, java.io.Serializable, Cloneable, Comparable<setCoolingMode_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setCoolingMode_result");
 
 
-    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new setCoolingForMeat_argsStandardSchemeFactory();
-    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new setCoolingForMeat_argsTupleSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new setCoolingMode_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new setCoolingMode_resultTupleSchemeFactory();
 
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -1239,20 +1465,20 @@ public class FridgeDevice {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setCoolingForMeat_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setCoolingMode_result.class, metaDataMap);
     }
 
-    public setCoolingForMeat_args() {
+    public setCoolingMode_result() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public setCoolingForMeat_args(setCoolingForMeat_args other) {
+    public setCoolingMode_result(setCoolingMode_result other) {
     }
 
-    public setCoolingForMeat_args deepCopy() {
-      return new setCoolingForMeat_args(this);
+    public setCoolingMode_result deepCopy() {
+      return new setCoolingMode_result(this);
     }
 
     @Override
@@ -1286,12 +1512,12 @@ public class FridgeDevice {
     public boolean equals(java.lang.Object that) {
       if (that == null)
         return false;
-      if (that instanceof setCoolingForMeat_args)
-        return this.equals((setCoolingForMeat_args)that);
+      if (that instanceof setCoolingMode_result)
+        return this.equals((setCoolingMode_result)that);
       return false;
     }
 
-    public boolean equals(setCoolingForMeat_args that) {
+    public boolean equals(setCoolingMode_result that) {
       if (that == null)
         return false;
       if (this == that)
@@ -1308,7 +1534,7 @@ public class FridgeDevice {
     }
 
     @Override
-    public int compareTo(setCoolingForMeat_args other) {
+    public int compareTo(setCoolingMode_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -1329,11 +1555,11 @@ public class FridgeDevice {
 
     public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
       scheme(oprot).write(oprot, this);
-    }
+      }
 
     @Override
     public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("setCoolingForMeat_args(");
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("setCoolingMode_result(");
       boolean first = true;
 
       sb.append(")");
@@ -1361,15 +1587,15 @@ public class FridgeDevice {
       }
     }
 
-    private static class setCoolingForMeat_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public setCoolingForMeat_argsStandardScheme getScheme() {
-        return new setCoolingForMeat_argsStandardScheme();
+    private static class setCoolingMode_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public setCoolingMode_resultStandardScheme getScheme() {
+        return new setCoolingMode_resultStandardScheme();
       }
     }
 
-    private static class setCoolingForMeat_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<setCoolingForMeat_args> {
+    private static class setCoolingMode_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<setCoolingMode_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, setCoolingForMeat_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setCoolingMode_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -1390,7 +1616,7 @@ public class FridgeDevice {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, setCoolingForMeat_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setCoolingMode_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -1400,1014 +1626,22 @@ public class FridgeDevice {
 
     }
 
-    private static class setCoolingForMeat_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public setCoolingForMeat_argsTupleScheme getScheme() {
-        return new setCoolingForMeat_argsTupleScheme();
+    private static class setCoolingMode_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public setCoolingMode_resultTupleScheme getScheme() {
+        return new setCoolingMode_resultTupleScheme();
       }
     }
 
-    private static class setCoolingForMeat_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<setCoolingForMeat_args> {
+    private static class setCoolingMode_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<setCoolingMode_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, setCoolingForMeat_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, setCoolingMode_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, setCoolingForMeat_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, setCoolingMode_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      }
-    }
-
-    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
-      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
-    }
-  }
-
-  public static class setCoolingForMeat_result implements org.apache.thrift.TBase<setCoolingForMeat_result, setCoolingForMeat_result._Fields>, java.io.Serializable, Cloneable, Comparable<setCoolingForMeat_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setCoolingForMeat_result");
-
-    private static final org.apache.thrift.protocol.TField E_FIELD_DESC = new org.apache.thrift.protocol.TField("e", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-
-    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new setCoolingForMeat_resultStandardSchemeFactory();
-    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new setCoolingForMeat_resultTupleSchemeFactory();
-
-    public @org.apache.thrift.annotation.Nullable InvalidOperationException e; // required
-
-    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
-    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      E((short)1, "e");
-
-      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
-
-      static {
-        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
-          byName.put(field.getFieldName(), field);
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, or null if its not found.
-       */
-      @org.apache.thrift.annotation.Nullable
-      public static _Fields findByThriftId(int fieldId) {
-        switch(fieldId) {
-          case 1: // E
-            return E;
-          default:
-            return null;
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, throwing an exception
-       * if it is not found.
-       */
-      public static _Fields findByThriftIdOrThrow(int fieldId) {
-        _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
-        return fields;
-      }
-
-      /**
-       * Find the _Fields constant that matches name, or null if its not found.
-       */
-      @org.apache.thrift.annotation.Nullable
-      public static _Fields findByName(java.lang.String name) {
-        return byName.get(name);
-      }
-
-      private final short _thriftId;
-      private final java.lang.String _fieldName;
-
-      _Fields(short thriftId, java.lang.String fieldName) {
-        _thriftId = thriftId;
-        _fieldName = fieldName;
-      }
-
-      public short getThriftFieldId() {
-        return _thriftId;
-      }
-
-      public java.lang.String getFieldName() {
-        return _fieldName;
-      }
-    }
-
-    // isset id assignments
-    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
-    static {
-      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.E, new org.apache.thrift.meta_data.FieldMetaData("e", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, InvalidOperationException.class)));
-      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setCoolingForMeat_result.class, metaDataMap);
-    }
-
-    public setCoolingForMeat_result() {
-    }
-
-    public setCoolingForMeat_result(
-      InvalidOperationException e)
-    {
-      this();
-      this.e = e;
-    }
-
-    /**
-     * Performs a deep copy on <i>other</i>.
-     */
-    public setCoolingForMeat_result(setCoolingForMeat_result other) {
-      if (other.isSetE()) {
-        this.e = new InvalidOperationException(other.e);
-      }
-    }
-
-    public setCoolingForMeat_result deepCopy() {
-      return new setCoolingForMeat_result(this);
-    }
-
-    @Override
-    public void clear() {
-      this.e = null;
-    }
-
-    @org.apache.thrift.annotation.Nullable
-    public InvalidOperationException getE() {
-      return this.e;
-    }
-
-    public setCoolingForMeat_result setE(@org.apache.thrift.annotation.Nullable InvalidOperationException e) {
-      this.e = e;
-      return this;
-    }
-
-    public void unsetE() {
-      this.e = null;
-    }
-
-    /** Returns true if field e is set (has been assigned a value) and false otherwise */
-    public boolean isSetE() {
-      return this.e != null;
-    }
-
-    public void setEIsSet(boolean value) {
-      if (!value) {
-        this.e = null;
-      }
-    }
-
-    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
-      switch (field) {
-      case E:
-        if (value == null) {
-          unsetE();
-        } else {
-          setE((InvalidOperationException)value);
-        }
-        break;
-
-      }
-    }
-
-    @org.apache.thrift.annotation.Nullable
-    public java.lang.Object getFieldValue(_Fields field) {
-      switch (field) {
-      case E:
-        return getE();
-
-      }
-      throw new java.lang.IllegalStateException();
-    }
-
-    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
-    public boolean isSet(_Fields field) {
-      if (field == null) {
-        throw new java.lang.IllegalArgumentException();
-      }
-
-      switch (field) {
-      case E:
-        return isSetE();
-      }
-      throw new java.lang.IllegalStateException();
-    }
-
-    @Override
-    public boolean equals(java.lang.Object that) {
-      if (that == null)
-        return false;
-      if (that instanceof setCoolingForMeat_result)
-        return this.equals((setCoolingForMeat_result)that);
-      return false;
-    }
-
-    public boolean equals(setCoolingForMeat_result that) {
-      if (that == null)
-        return false;
-      if (this == that)
-        return true;
-
-      boolean this_present_e = true && this.isSetE();
-      boolean that_present_e = true && that.isSetE();
-      if (this_present_e || that_present_e) {
-        if (!(this_present_e && that_present_e))
-          return false;
-        if (!this.e.equals(that.e))
-          return false;
-      }
-
-      return true;
-    }
-
-    @Override
-    public int hashCode() {
-      int hashCode = 1;
-
-      hashCode = hashCode * 8191 + ((isSetE()) ? 131071 : 524287);
-      if (isSetE())
-        hashCode = hashCode * 8191 + e.hashCode();
-
-      return hashCode;
-    }
-
-    @Override
-    public int compareTo(setCoolingForMeat_result other) {
-      if (!getClass().equals(other.getClass())) {
-        return getClass().getName().compareTo(other.getClass().getName());
-      }
-
-      int lastComparison = 0;
-
-      lastComparison = java.lang.Boolean.valueOf(isSetE()).compareTo(other.isSetE());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetE()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e, other.e);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      return 0;
-    }
-
-    @org.apache.thrift.annotation.Nullable
-    public _Fields fieldForId(int fieldId) {
-      return _Fields.findByThriftId(fieldId);
-    }
-
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
-      scheme(iprot).read(iprot, this);
-    }
-
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
-      scheme(oprot).write(oprot, this);
-      }
-
-    @Override
-    public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("setCoolingForMeat_result(");
-      boolean first = true;
-
-      sb.append("e:");
-      if (this.e == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.e);
-      }
-      first = false;
-      sb.append(")");
-      return sb.toString();
-    }
-
-    public void validate() throws org.apache.thrift.TException {
-      // check for required fields
-      // check for sub-struct validity
-    }
-
-    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-      try {
-        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
-      try {
-        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private static class setCoolingForMeat_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public setCoolingForMeat_resultStandardScheme getScheme() {
-        return new setCoolingForMeat_resultStandardScheme();
-      }
-    }
-
-    private static class setCoolingForMeat_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<setCoolingForMeat_result> {
-
-      public void read(org.apache.thrift.protocol.TProtocol iprot, setCoolingForMeat_result struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TField schemeField;
-        iprot.readStructBegin();
-        while (true)
-        {
-          schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
-            break;
-          }
-          switch (schemeField.id) {
-            case 1: // E
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.e = new InvalidOperationException();
-                struct.e.read(iprot);
-                struct.setEIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            default:
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-          }
-          iprot.readFieldEnd();
-        }
-        iprot.readStructEnd();
-
-        // check for required fields of primitive type, which can't be checked in the validate method
-        struct.validate();
-      }
-
-      public void write(org.apache.thrift.protocol.TProtocol oprot, setCoolingForMeat_result struct) throws org.apache.thrift.TException {
-        struct.validate();
-
-        oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.e != null) {
-          oprot.writeFieldBegin(E_FIELD_DESC);
-          struct.e.write(oprot);
-          oprot.writeFieldEnd();
-        }
-        oprot.writeFieldStop();
-        oprot.writeStructEnd();
-      }
-
-    }
-
-    private static class setCoolingForMeat_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public setCoolingForMeat_resultTupleScheme getScheme() {
-        return new setCoolingForMeat_resultTupleScheme();
-      }
-    }
-
-    private static class setCoolingForMeat_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<setCoolingForMeat_result> {
-
-      @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, setCoolingForMeat_result struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet optionals = new java.util.BitSet();
-        if (struct.isSetE()) {
-          optionals.set(0);
-        }
-        oprot.writeBitSet(optionals, 1);
-        if (struct.isSetE()) {
-          struct.e.write(oprot);
-        }
-      }
-
-      @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, setCoolingForMeat_result struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(1);
-        if (incoming.get(0)) {
-          struct.e = new InvalidOperationException();
-          struct.e.read(iprot);
-          struct.setEIsSet(true);
-        }
-      }
-    }
-
-    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
-      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
-    }
-  }
-
-  public static class setOtherCooling_args implements org.apache.thrift.TBase<setOtherCooling_args, setOtherCooling_args._Fields>, java.io.Serializable, Cloneable, Comparable<setOtherCooling_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setOtherCooling_args");
-
-
-    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new setOtherCooling_argsStandardSchemeFactory();
-    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new setOtherCooling_argsTupleSchemeFactory();
-
-
-    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
-    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
-
-      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
-
-      static {
-        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
-          byName.put(field.getFieldName(), field);
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, or null if its not found.
-       */
-      @org.apache.thrift.annotation.Nullable
-      public static _Fields findByThriftId(int fieldId) {
-        switch(fieldId) {
-          default:
-            return null;
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, throwing an exception
-       * if it is not found.
-       */
-      public static _Fields findByThriftIdOrThrow(int fieldId) {
-        _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
-        return fields;
-      }
-
-      /**
-       * Find the _Fields constant that matches name, or null if its not found.
-       */
-      @org.apache.thrift.annotation.Nullable
-      public static _Fields findByName(java.lang.String name) {
-        return byName.get(name);
-      }
-
-      private final short _thriftId;
-      private final java.lang.String _fieldName;
-
-      _Fields(short thriftId, java.lang.String fieldName) {
-        _thriftId = thriftId;
-        _fieldName = fieldName;
-      }
-
-      public short getThriftFieldId() {
-        return _thriftId;
-      }
-
-      public java.lang.String getFieldName() {
-        return _fieldName;
-      }
-    }
-    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
-    static {
-      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setOtherCooling_args.class, metaDataMap);
-    }
-
-    public setOtherCooling_args() {
-    }
-
-    /**
-     * Performs a deep copy on <i>other</i>.
-     */
-    public setOtherCooling_args(setOtherCooling_args other) {
-    }
-
-    public setOtherCooling_args deepCopy() {
-      return new setOtherCooling_args(this);
-    }
-
-    @Override
-    public void clear() {
-    }
-
-    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
-      switch (field) {
-      }
-    }
-
-    @org.apache.thrift.annotation.Nullable
-    public java.lang.Object getFieldValue(_Fields field) {
-      switch (field) {
-      }
-      throw new java.lang.IllegalStateException();
-    }
-
-    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
-    public boolean isSet(_Fields field) {
-      if (field == null) {
-        throw new java.lang.IllegalArgumentException();
-      }
-
-      switch (field) {
-      }
-      throw new java.lang.IllegalStateException();
-    }
-
-    @Override
-    public boolean equals(java.lang.Object that) {
-      if (that == null)
-        return false;
-      if (that instanceof setOtherCooling_args)
-        return this.equals((setOtherCooling_args)that);
-      return false;
-    }
-
-    public boolean equals(setOtherCooling_args that) {
-      if (that == null)
-        return false;
-      if (this == that)
-        return true;
-
-      return true;
-    }
-
-    @Override
-    public int hashCode() {
-      int hashCode = 1;
-
-      return hashCode;
-    }
-
-    @Override
-    public int compareTo(setOtherCooling_args other) {
-      if (!getClass().equals(other.getClass())) {
-        return getClass().getName().compareTo(other.getClass().getName());
-      }
-
-      int lastComparison = 0;
-
-      return 0;
-    }
-
-    @org.apache.thrift.annotation.Nullable
-    public _Fields fieldForId(int fieldId) {
-      return _Fields.findByThriftId(fieldId);
-    }
-
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
-      scheme(iprot).read(iprot, this);
-    }
-
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
-      scheme(oprot).write(oprot, this);
-    }
-
-    @Override
-    public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("setOtherCooling_args(");
-      boolean first = true;
-
-      sb.append(")");
-      return sb.toString();
-    }
-
-    public void validate() throws org.apache.thrift.TException {
-      // check for required fields
-      // check for sub-struct validity
-    }
-
-    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-      try {
-        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
-      try {
-        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private static class setOtherCooling_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public setOtherCooling_argsStandardScheme getScheme() {
-        return new setOtherCooling_argsStandardScheme();
-      }
-    }
-
-    private static class setOtherCooling_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<setOtherCooling_args> {
-
-      public void read(org.apache.thrift.protocol.TProtocol iprot, setOtherCooling_args struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TField schemeField;
-        iprot.readStructBegin();
-        while (true)
-        {
-          schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
-            break;
-          }
-          switch (schemeField.id) {
-            default:
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-          }
-          iprot.readFieldEnd();
-        }
-        iprot.readStructEnd();
-
-        // check for required fields of primitive type, which can't be checked in the validate method
-        struct.validate();
-      }
-
-      public void write(org.apache.thrift.protocol.TProtocol oprot, setOtherCooling_args struct) throws org.apache.thrift.TException {
-        struct.validate();
-
-        oprot.writeStructBegin(STRUCT_DESC);
-        oprot.writeFieldStop();
-        oprot.writeStructEnd();
-      }
-
-    }
-
-    private static class setOtherCooling_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public setOtherCooling_argsTupleScheme getScheme() {
-        return new setOtherCooling_argsTupleScheme();
-      }
-    }
-
-    private static class setOtherCooling_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<setOtherCooling_args> {
-
-      @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, setOtherCooling_args struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      }
-
-      @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, setOtherCooling_args struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      }
-    }
-
-    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
-      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
-    }
-  }
-
-  public static class setOtherCooling_result implements org.apache.thrift.TBase<setOtherCooling_result, setOtherCooling_result._Fields>, java.io.Serializable, Cloneable, Comparable<setOtherCooling_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setOtherCooling_result");
-
-    private static final org.apache.thrift.protocol.TField E_FIELD_DESC = new org.apache.thrift.protocol.TField("e", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-
-    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new setOtherCooling_resultStandardSchemeFactory();
-    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new setOtherCooling_resultTupleSchemeFactory();
-
-    public @org.apache.thrift.annotation.Nullable InvalidOperationException e; // required
-
-    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
-    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      E((short)1, "e");
-
-      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
-
-      static {
-        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
-          byName.put(field.getFieldName(), field);
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, or null if its not found.
-       */
-      @org.apache.thrift.annotation.Nullable
-      public static _Fields findByThriftId(int fieldId) {
-        switch(fieldId) {
-          case 1: // E
-            return E;
-          default:
-            return null;
-        }
-      }
-
-      /**
-       * Find the _Fields constant that matches fieldId, throwing an exception
-       * if it is not found.
-       */
-      public static _Fields findByThriftIdOrThrow(int fieldId) {
-        _Fields fields = findByThriftId(fieldId);
-        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
-        return fields;
-      }
-
-      /**
-       * Find the _Fields constant that matches name, or null if its not found.
-       */
-      @org.apache.thrift.annotation.Nullable
-      public static _Fields findByName(java.lang.String name) {
-        return byName.get(name);
-      }
-
-      private final short _thriftId;
-      private final java.lang.String _fieldName;
-
-      _Fields(short thriftId, java.lang.String fieldName) {
-        _thriftId = thriftId;
-        _fieldName = fieldName;
-      }
-
-      public short getThriftFieldId() {
-        return _thriftId;
-      }
-
-      public java.lang.String getFieldName() {
-        return _fieldName;
-      }
-    }
-
-    // isset id assignments
-    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
-    static {
-      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.E, new org.apache.thrift.meta_data.FieldMetaData("e", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, InvalidOperationException.class)));
-      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setOtherCooling_result.class, metaDataMap);
-    }
-
-    public setOtherCooling_result() {
-    }
-
-    public setOtherCooling_result(
-      InvalidOperationException e)
-    {
-      this();
-      this.e = e;
-    }
-
-    /**
-     * Performs a deep copy on <i>other</i>.
-     */
-    public setOtherCooling_result(setOtherCooling_result other) {
-      if (other.isSetE()) {
-        this.e = new InvalidOperationException(other.e);
-      }
-    }
-
-    public setOtherCooling_result deepCopy() {
-      return new setOtherCooling_result(this);
-    }
-
-    @Override
-    public void clear() {
-      this.e = null;
-    }
-
-    @org.apache.thrift.annotation.Nullable
-    public InvalidOperationException getE() {
-      return this.e;
-    }
-
-    public setOtherCooling_result setE(@org.apache.thrift.annotation.Nullable InvalidOperationException e) {
-      this.e = e;
-      return this;
-    }
-
-    public void unsetE() {
-      this.e = null;
-    }
-
-    /** Returns true if field e is set (has been assigned a value) and false otherwise */
-    public boolean isSetE() {
-      return this.e != null;
-    }
-
-    public void setEIsSet(boolean value) {
-      if (!value) {
-        this.e = null;
-      }
-    }
-
-    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
-      switch (field) {
-      case E:
-        if (value == null) {
-          unsetE();
-        } else {
-          setE((InvalidOperationException)value);
-        }
-        break;
-
-      }
-    }
-
-    @org.apache.thrift.annotation.Nullable
-    public java.lang.Object getFieldValue(_Fields field) {
-      switch (field) {
-      case E:
-        return getE();
-
-      }
-      throw new java.lang.IllegalStateException();
-    }
-
-    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
-    public boolean isSet(_Fields field) {
-      if (field == null) {
-        throw new java.lang.IllegalArgumentException();
-      }
-
-      switch (field) {
-      case E:
-        return isSetE();
-      }
-      throw new java.lang.IllegalStateException();
-    }
-
-    @Override
-    public boolean equals(java.lang.Object that) {
-      if (that == null)
-        return false;
-      if (that instanceof setOtherCooling_result)
-        return this.equals((setOtherCooling_result)that);
-      return false;
-    }
-
-    public boolean equals(setOtherCooling_result that) {
-      if (that == null)
-        return false;
-      if (this == that)
-        return true;
-
-      boolean this_present_e = true && this.isSetE();
-      boolean that_present_e = true && that.isSetE();
-      if (this_present_e || that_present_e) {
-        if (!(this_present_e && that_present_e))
-          return false;
-        if (!this.e.equals(that.e))
-          return false;
-      }
-
-      return true;
-    }
-
-    @Override
-    public int hashCode() {
-      int hashCode = 1;
-
-      hashCode = hashCode * 8191 + ((isSetE()) ? 131071 : 524287);
-      if (isSetE())
-        hashCode = hashCode * 8191 + e.hashCode();
-
-      return hashCode;
-    }
-
-    @Override
-    public int compareTo(setOtherCooling_result other) {
-      if (!getClass().equals(other.getClass())) {
-        return getClass().getName().compareTo(other.getClass().getName());
-      }
-
-      int lastComparison = 0;
-
-      lastComparison = java.lang.Boolean.valueOf(isSetE()).compareTo(other.isSetE());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetE()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e, other.e);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      return 0;
-    }
-
-    @org.apache.thrift.annotation.Nullable
-    public _Fields fieldForId(int fieldId) {
-      return _Fields.findByThriftId(fieldId);
-    }
-
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
-      scheme(iprot).read(iprot, this);
-    }
-
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
-      scheme(oprot).write(oprot, this);
-      }
-
-    @Override
-    public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("setOtherCooling_result(");
-      boolean first = true;
-
-      sb.append("e:");
-      if (this.e == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.e);
-      }
-      first = false;
-      sb.append(")");
-      return sb.toString();
-    }
-
-    public void validate() throws org.apache.thrift.TException {
-      // check for required fields
-      // check for sub-struct validity
-    }
-
-    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-      try {
-        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
-      try {
-        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
-        throw new java.io.IOException(te);
-      }
-    }
-
-    private static class setOtherCooling_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public setOtherCooling_resultStandardScheme getScheme() {
-        return new setOtherCooling_resultStandardScheme();
-      }
-    }
-
-    private static class setOtherCooling_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<setOtherCooling_result> {
-
-      public void read(org.apache.thrift.protocol.TProtocol iprot, setOtherCooling_result struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TField schemeField;
-        iprot.readStructBegin();
-        while (true)
-        {
-          schemeField = iprot.readFieldBegin();
-          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
-            break;
-          }
-          switch (schemeField.id) {
-            case 1: // E
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.e = new InvalidOperationException();
-                struct.e.read(iprot);
-                struct.setEIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            default:
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-          }
-          iprot.readFieldEnd();
-        }
-        iprot.readStructEnd();
-
-        // check for required fields of primitive type, which can't be checked in the validate method
-        struct.validate();
-      }
-
-      public void write(org.apache.thrift.protocol.TProtocol oprot, setOtherCooling_result struct) throws org.apache.thrift.TException {
-        struct.validate();
-
-        oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.e != null) {
-          oprot.writeFieldBegin(E_FIELD_DESC);
-          struct.e.write(oprot);
-          oprot.writeFieldEnd();
-        }
-        oprot.writeFieldStop();
-        oprot.writeStructEnd();
-      }
-
-    }
-
-    private static class setOtherCooling_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public setOtherCooling_resultTupleScheme getScheme() {
-        return new setOtherCooling_resultTupleScheme();
-      }
-    }
-
-    private static class setOtherCooling_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<setOtherCooling_result> {
-
-      @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, setOtherCooling_result struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet optionals = new java.util.BitSet();
-        if (struct.isSetE()) {
-          optionals.set(0);
-        }
-        oprot.writeBitSet(optionals, 1);
-        if (struct.isSetE()) {
-          struct.e.write(oprot);
-        }
-      }
-
-      @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, setOtherCooling_result struct) throws org.apache.thrift.TException {
-        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(1);
-        if (incoming.get(0)) {
-          struct.e = new InvalidOperationException();
-          struct.e.read(iprot);
-          struct.setEIsSet(true);
-        }
       }
     }
 

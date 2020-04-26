@@ -1,5 +1,7 @@
 import handler.FreezerDeviceHandler;
+import handler.FridgeDeviceHandler;
 import handler.GateDeviceHandler;
+import sr.rpc.thrift.FoodCoolingMode;
 import sr.rpc.thrift.FreezingMode;
 import util.ConsoleColor;
 
@@ -12,6 +14,7 @@ public class SmartHomeServerRunnable implements Runnable {
         SmartHomeServerDevicesBuilder creator = new SmartHomeServerDevicesBuilder()
                 .addNewDevice(createGateDeviceHandler())
                 .addNewDevice(createFreezerDeviceHandler())
+                .addNewDevice(createFridgeDeviceHandler())
                 .create();
 
         printlnColoured("Server has started running: ", ConsoleColor.GREEN_BOLD);
@@ -24,5 +27,9 @@ public class SmartHomeServerRunnable implements Runnable {
 
     private FreezerDeviceHandler createFreezerDeviceHandler() {
         return new FreezerDeviceHandler("FREEZER_IDENTIFIER", "FREEZER", FreezingMode.LOW);
+    }
+
+    private FridgeDeviceHandler createFridgeDeviceHandler() {
+        return new FridgeDeviceHandler("FRIDGE_IDENTIFIER", "FRIDGE", FoodCoolingMode.REGULAR);
     }
 }
