@@ -45,8 +45,17 @@ public class DataGenerationService {
             return;
         }
 
+        boolean reconnection = false;
+        for (AirQualitySubscriber s : subscribers) {
+            if (Objects.equals(s.getClientId(), subscriber.getClientId())) {
+                reconnection = true;
+                printlnColoured("Client with id: " + subscriber.getClientId() + " has reconnected!", ConsoleColor.GREEN_BOLD_BRIGHT);
+                break;
+            }
+        }
+
         subscribers.add(subscriber);
-        printlnColoured("New subscriber has been added: " + subscriber, ConsoleColor.BLUE_BOLD);
+        printlnColoured(reconnection ? "Recconnection successful!" : "New subscriber has been added: " + subscriber, ConsoleColor.BLUE_BOLD);
     }
 
     @SneakyThrows
@@ -60,10 +69,9 @@ public class DataGenerationService {
 
             sendAirQualityInfo(airQualityInfo);
             removeClientsWithFatalConnectionIssues();
-            sleep(300);
+            sleep(500);
         }
     }
-
 
     private String getRandomAvailableCity() {
         return LIST_OF_AVAILABLE_CITIES.get(random.nextInt(LIST_OF_AVAILABLE_CITIES.size()));
