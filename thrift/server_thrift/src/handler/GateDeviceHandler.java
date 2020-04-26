@@ -27,6 +27,7 @@ public class GateDeviceHandler extends OpenedClosedDeviceHandler implements Gate
 
     @Override
     public boolean isAutomatic() throws TException {
+        printlnColoured("Server has received a request to get automation status", ConsoleColor.YELLOW_BOLD);
         return isAutomatic.get();
     }
 
@@ -34,10 +35,12 @@ public class GateDeviceHandler extends OpenedClosedDeviceHandler implements Gate
     public void setAutomatic() throws InvalidOperationException, TException {
         printlnColoured("Server has received a request to set gate as automatic", ConsoleColor.YELLOW_BOLD);
 
-        if (isAlreadyAutomatic())
+        if (isAlreadyAutomatic()) {
+            printlnColoured("Problem with setting gate as automatic - it's already automatic", ConsoleColor.RED_BOLD);
             throw new InvalidOperationException(1, "You cannot set gate device as automatic as it's already automatic");
+        }
 
-        printlnColoured("Setting gate as automatic", ConsoleColor.BLUE_BOLD);
+        printlnColoured("Gate has become automatic", ConsoleColor.BLUE_BOLD);
         this.isAutomatic.set(true);
     }
 
@@ -45,10 +48,12 @@ public class GateDeviceHandler extends OpenedClosedDeviceHandler implements Gate
     public void setNotAutomatic() throws InvalidOperationException, TException {
         printlnColoured("Server has received a request to set gate as non automatic", ConsoleColor.YELLOW_BOLD);
 
-        if (isNotAutomaticYet())
+        if (isNotAutomaticYet()) {
+            printlnColoured("Problem with setting gate as not automatic - it's already not automatic", ConsoleColor.RED_BOLD);
             throw new InvalidOperationException(1, "You cannot set gate device as non automatic as it's already non automatic");
+        }
 
-        printlnColoured("Setting gate non automatic", ConsoleColor.BLUE_BOLD);
+        printlnColoured("Gate has become non automatic", ConsoleColor.BLUE_BOLD);
         this.isAutomatic.set(false);
     }
 

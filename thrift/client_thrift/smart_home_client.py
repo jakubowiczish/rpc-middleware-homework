@@ -46,26 +46,30 @@ def print_all_available_devices():
 
 def open_gate():
     gate.open()
+    print("Gate is now opened")
     return True
 
 
 def close_gate():
     gate.close()
+    print("Gate is now closed")
     return True
 
 
-def get_gate_mode():
-    print(gate.getOpenClosedMode())
+def get_gate_open_closed_mode():
+    print(OpenClosedMode._VALUES_TO_NAMES.get(gate.getOpenClosedMode()))
     return True
 
 
 def set_gate_auto():
     gate.setAutomatic()
+    print("Gate is now automatic")
     return True
 
 
 def set_gate_not_auto():
     gate.setNotAutomatic()
+    print("Gate is now not automatic")
     return True
 
 
@@ -76,16 +80,18 @@ def get_gate_auto_status():
 
 def turn_on_freezer():
     freezer.turnOn()
+    print("Freezer is now on")
     return True
 
 
 def turn_off_freezer():
     freezer.turnOff()
+    print("Freezer is now off")
     return True
 
 
 def get_freezer_on_off_status():
-    print(freezer.getOnOffStatus())
+    print(SwitchMode._VALUES_TO_NAMES.get(freezer.getOnOffStatus()))
     return True
 
 
@@ -95,41 +101,60 @@ def get_freezer_power():
 
 
 def set_freezer_power():
-    power = input("Choose power level (from 0 to 100)")
-    freezer.setPower(int(power))
+    power = int(input("Choose power level (from 0 to 100) "))
+    if power < 0 or power > 100:
+        raise InvalidArgumentsException("Power must be a value between 0 and 100")
+    freezer.setPower(power)
     return True
 
 
 def lower_freezing():
     freezer.lowerFreezing()
+    print("Freezing is now lower")
     return True
 
 
 def increase_freezing():
     freezer.increaseFreezing()
+    print("Freezing is now higher")
     return True
 
 
 def turn_on_fridge():
     fridge.turnOn()
+    print("Fridge is now on")
     return True
 
 
 def turn_off_fridge():
     fridge.turnOff()
+    print("Fridge is now off")
     return True
 
 
 def get_cooling_mode():
-    print(fridge.getFoodCoolingMode())
+    print(FoodCoolingMode._VALUES_TO_NAMES.get(fridge.getFoodCoolingMode()))
     return True
 
 
 def set_cooling_mode():
-    for x in FoodCoolingMode._VALUES_TO_NAMES:
-        print(x)
+    print(FoodCoolingMode._NAMES_TO_VALUES)
+    cooling_mode = int(input("Choose number of cooling mode from those above:"))
+    if cooling_mode == 1:
+        fridge.setCoolingMode(FoodCoolingMode.REGULAR)
+        print("Cooling mode is now regular")
+    elif cooling_mode == 2:
+        fridge.setCoolingMode(FoodCoolingMode.ENERGY_SAVING)
+        print("Cooling mode is now energy saving")
+    elif cooling_mode == 3:
+        fridge.setCoolingMode(FoodCoolingMode.MAX)
+        print("Cooling mode is now maximum")
 
-    fridge.setCoolingMode(FoodCoolingMode.MAX)
+    return True
+
+
+def get_fridge_on_off_status():
+    print(SwitchMode._VALUES_TO_NAMES.get(fridge.getOnOffStatus()))
     return True
 
 
@@ -145,20 +170,21 @@ commands = [
     ("open gate", open_gate),
     ("close gate", close_gate),
     ("set gate auto", set_gate_auto),
-    ("get gate mode", get_gate_mode),
+    ("get gate open closed mode", get_gate_open_closed_mode),
     ("set gate not auto", set_gate_not_auto),
     ("get gate auto status", get_gate_auto_status),
     ("turn on freezer", turn_on_freezer),
     ("turn off freezer", turn_off_freezer),
-    ("get freezer on off status", get_freezer_on_off_status),
     ("set freezer power", set_freezer_power),
     ("get freezer power", get_freezer_power),
+    ("get freezer on off status", get_freezer_on_off_status),
     ("lower freezing", lower_freezing),
     ("increase freezing", increase_freezing),
     ("turn on fridge", turn_on_fridge),
     ("turn off fridge", turn_off_fridge),
-    ("get cooling mode", get_cooling_mode),
     ("set cooling mode", set_cooling_mode),
+    ("get cooling mode", get_cooling_mode),
+    ("get fridge on off status", get_fridge_on_off_status),
 ]
 
 

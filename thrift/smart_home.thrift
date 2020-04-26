@@ -28,9 +28,7 @@ enum FreezingMode {
 enum FoodCoolingMode {
     REGULAR = 1,
     ENERGY_SAVING = 2,
-    VACATION = 3,
-    MAX = 4,
-    MIN = 5
+    MAX = 3,
 }
 
 service HomeDevice {

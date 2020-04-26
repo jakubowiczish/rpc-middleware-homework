@@ -1,6 +1,5 @@
 package handler;
 
-import lombok.SneakyThrows;
 import org.apache.thrift.TBaseProcessor;
 import org.apache.thrift.TException;
 import sr.rpc.thrift.InvalidOperationException;
@@ -28,6 +27,7 @@ public class SwitchableDeviceHandler extends HomeDeviceHandler implements Switch
 
     @Override
     public synchronized SwitchMode getOnOffStatus() throws TException {
+        printlnColoured("Server has received a request to get on off status", ConsoleColor.YELLOW_BOLD);
         return this.mode.get();
     }
 
@@ -51,12 +51,6 @@ public class SwitchableDeviceHandler extends HomeDeviceHandler implements Switch
 
         printlnColoured("Request to turn off processed successfully", ConsoleColor.CYAN_BOLD);
         this.mode.set(SwitchMode.OFF);
-    }
-
-    @SneakyThrows
-    protected void throwIfOffAndRequested() {
-        if (isOff())
-            throw new InvalidOperationException(1, "You cannot perform any operation on the device as it's turned off");
     }
 
     private synchronized boolean isOn() {

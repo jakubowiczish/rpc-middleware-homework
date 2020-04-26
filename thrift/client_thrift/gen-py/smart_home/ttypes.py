@@ -64,24 +64,18 @@ class FreezingMode(object):
 class FoodCoolingMode(object):
     REGULAR = 1
     ENERGY_SAVING = 2
-    VACATION = 3
-    MAX = 4
-    MIN = 5
+    MAX = 3
 
     _VALUES_TO_NAMES = {
         1: "REGULAR",
         2: "ENERGY_SAVING",
-        3: "VACATION",
-        4: "MAX",
-        5: "MIN",
+        3: "MAX",
     }
 
     _NAMES_TO_VALUES = {
         "REGULAR": 1,
         "ENERGY_SAVING": 2,
-        "VACATION": 3,
-        "MAX": 4,
-        "MIN": 5,
+        "MAX": 3,
     }
 
 

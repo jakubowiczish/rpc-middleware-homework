@@ -11,9 +11,7 @@ package sr.rpc.thrift;
 public enum FoodCoolingMode implements org.apache.thrift.TEnum {
   REGULAR(1),
   ENERGY_SAVING(2),
-  VACATION(3),
-  MAX(4),
-  MIN(5);
+  MAX(3);
 
   private final int value;
 
@@ -40,11 +38,7 @@ public enum FoodCoolingMode implements org.apache.thrift.TEnum {
       case 2:
         return ENERGY_SAVING;
       case 3:
-        return VACATION;
-      case 4:
         return MAX;
-      case 5:
-        return MIN;
       default:
         return null;
     }

@@ -27,18 +27,18 @@ public class FreezerDeviceHandler extends CoolingDeviceHandler implements Freeze
 
     @Override
     public synchronized FreezingMode getFreezingMode() throws TException {
-        throwIfOffAndRequested();
+        printlnColoured("Server has received a request to get freezing mode", ConsoleColor.YELLOW_BOLD);
         return this.freezingMode.get();
     }
 
     @Override
     public synchronized void increaseFreezing() throws InvalidOperationException, TException {
-        throwIfOffAndRequested();
-
         printlnColoured("Server has received a request to increase the freezing", ConsoleColor.YELLOW_BOLD);
 
-        if (isHigh())
+        if (isHigh()) {
+            printlnColoured("Problem with setting freezing to high - it's already high", ConsoleColor.RED_BOLD);
             throw new InvalidOperationException(1, "You cannot increase the freezing as it's already high");
+        }
 
         printlnColoured("Request to increase freezing processed successfully", ConsoleColor.CYAN_BOLD);
         this.freezingMode.set(FreezingMode.HIGH);
@@ -46,12 +46,12 @@ public class FreezerDeviceHandler extends CoolingDeviceHandler implements Freeze
 
     @Override
     public synchronized void lowerFreezing() throws InvalidOperationException, TException {
-        throwIfOffAndRequested();
-
         printlnColoured("Server has received a request to lower the freezing", ConsoleColor.YELLOW_BOLD);
 
-        if (isLow())
+        if (isLow()) {
+            printlnColoured("Problem with setting freezing to low - it's already low", ConsoleColor.RED_BOLD);
             throw new InvalidOperationException(1, "You cannot lower the freezing as it's already low");
+        }
 
         printlnColoured("Request to lower freezing processed successfully", ConsoleColor.CYAN_BOLD);
         this.freezingMode.set(FreezingMode.LOW);

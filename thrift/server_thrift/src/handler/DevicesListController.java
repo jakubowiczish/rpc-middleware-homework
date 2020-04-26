@@ -3,10 +3,12 @@ package handler;
 import org.apache.thrift.TException;
 import sr.rpc.thrift.Device;
 import sr.rpc.thrift.DevicesList;
+import util.ConsoleColor;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static util.ColouredPrinter.printlnColoured;
 
 public class DevicesListController implements DevicesList.Iface {
 
@@ -18,6 +20,7 @@ public class DevicesListController implements DevicesList.Iface {
 
     @Override
     public List<Device> getListOfAvailableDevices() throws TException {
+        printlnColoured("Server has received a request to get a list of all available devices", ConsoleColor.YELLOW_BOLD);
         return listOfDevices;
     }
 

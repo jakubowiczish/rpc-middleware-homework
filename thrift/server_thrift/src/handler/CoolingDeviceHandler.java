@@ -28,18 +28,18 @@ public class CoolingDeviceHandler extends SwitchableDeviceHandler implements Coo
 
     @Override
     public synchronized int getPower() throws TException {
-        throwIfOffAndRequested();
+        printlnColoured("Server has received a request to get the power level of the device", ConsoleColor.YELLOW_BOLD);
         return this.power.get();
     }
 
     @Override
     public synchronized void setPower(int power) throws InvalidArgumentsException, TException {
-        throwIfOffAndRequested();
-
         printlnColoured("Server has received a request to set the power level of the device", ConsoleColor.YELLOW_BOLD);
 
-        if (isPowerValueIncorrect(power))
+        if (isPowerValueIncorrect(power)) {
+            printlnColoured("Problem with setting such power value - it should be a value between 0 and 100", ConsoleColor.RED_BOLD);
             throw new InvalidOperationException(1, "You cannot set power value as: " + power + ", only values between 0 and 100 allowed");
+        }
 
         printlnColoured("Request to turn on processed successfully", ConsoleColor.CYAN_BOLD);
         this.power.set(power);

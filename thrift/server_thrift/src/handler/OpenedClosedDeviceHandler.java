@@ -27,6 +27,7 @@ public class OpenedClosedDeviceHandler extends HomeDeviceHandler implements Open
 
     @Override
     public OpenClosedMode getOpenClosedMode() throws TException {
+        printlnColoured("Server has received a request to get open closed mode", ConsoleColor.YELLOW_BOLD);
         return mode.get();
     }
 

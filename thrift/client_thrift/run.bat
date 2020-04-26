@@ -1,0 +1,1 @@
+poetry run python smart_home_client.py

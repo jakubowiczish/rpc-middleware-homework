@@ -27,24 +27,24 @@ public class FridgeDeviceHandler extends CoolingDeviceHandler implements FridgeD
 
     @Override
     public synchronized FoodCoolingMode getFoodCoolingMode() throws TException {
-        throwIfOffAndRequested();
+        printlnColoured("Server has received a request to get food cooling mode", ConsoleColor.YELLOW_BOLD);
         return this.foodCoolingMode.get();
     }
 
     @Override
-    public synchronized void setCoolingMode(FoodCoolingMode foodCoolingMode) throws TException {
-        throwIfOffAndRequested();
-
+    public synchronized void setCoolingMode(FoodCoolingMode foodCoolingMode) throws InvalidOperationException, TException {
         printlnColoured("Server has received a request set food cooling mode: " + foodCoolingMode.getValue(), ConsoleColor.YELLOW_BOLD);
 
-        if (isAlreadySet(foodCoolingMode))
+        if (isAlreadySet(foodCoolingMode)) {
+            printlnColoured("Problem with setting such food cooling mode - it's already low", ConsoleColor.RED_BOLD);
             throw new InvalidOperationException(1, "You cannot set such a cooling mode - it's already been set");
+        }
 
         printlnColoured("Request to set food cooling mode processed successfully", ConsoleColor.CYAN_BOLD);
         this.foodCoolingMode.set(foodCoolingMode);
     }
 
     private synchronized boolean isAlreadySet(FoodCoolingMode foodCoolingMode) {
-        return this.foodCoolingMode.get() == foodCoolingMode;
+        return this.foodCoolingMode.get().equals(foodCoolingMode);
     }
 }
