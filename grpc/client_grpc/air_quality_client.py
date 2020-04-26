@@ -2,6 +2,8 @@ import threading
 import time
 import uuid
 
+from printer import *
+
 import grpc
 
 from gen import air_quality_pb2
@@ -10,12 +12,12 @@ from gen import air_quality_pb2_grpc
 
 def run():
     city_name = input("Choose name of the city that you want to subscribe for air quality info: ")
-    print(city_name)
+    print_coloured(city_name, CVIOLET)
 
     while True:
         try:
             channel = create_channel()
-            print("Client's connecting...")
+            print_coloured("Client's connecting...", CGREEN)
 
             air_quality_service_stub = air_quality_pb2_grpc.AirQualityServiceStub(channel)
             client_identifier = str(uuid.uuid1())
@@ -24,12 +26,12 @@ def run():
             future_result = air_quality_service_stub.SubscribeOnAirQuality(request)
 
             for item in future_result:
-                print(item)
+                print_coloured(str(item), CGREEN)
 
-            print('Server has ended processing')
+            print_coloured('Server has ended processing', CGREEN)
 
         except:
-            print("Connection issues...")
+            print_coloured("Connection issues...", CRED)
             time.sleep(1)
 
 

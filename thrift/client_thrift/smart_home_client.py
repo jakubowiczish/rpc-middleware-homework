@@ -210,7 +210,7 @@ if __name__ == "__main__":
             if execute_given_command(command_to_execute):
                 print_coloured("Command executed successfully!", CGREEN)
             else:
-                print_coloured("Unknown command: " + command_to_execute, CRED2)
+                print_coloured("Unknown command: " + command_to_execute, CRED)
         except InvalidOperationException as e:
             print_coloured(f'Invalid operation: {e.why}', CRED)
         except InvalidArgumentsException as e:
