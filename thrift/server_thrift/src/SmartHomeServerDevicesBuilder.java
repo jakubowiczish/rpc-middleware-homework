@@ -15,7 +15,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SmartHomeServerDevicesBuilder {
 
-    private static final int port = 9090;
     private static final String ALL_HOME_DEVICES_SERVICE_NAME = "all";
 
     private final List<HomeDeviceHandler> homeDevices;
@@ -35,7 +34,7 @@ public class SmartHomeServerDevicesBuilder {
     }
 
     @SneakyThrows
-    public SmartHomeServerDevicesBuilder create() {
+    public SmartHomeServerDevicesBuilder create(int port) {
         multiplexedProcessor.registerProcessor(ALL_HOME_DEVICES_SERVICE_NAME, getAllDevicesProcessor());
 
         final TServerTransport transport = new TServerSocket(port);

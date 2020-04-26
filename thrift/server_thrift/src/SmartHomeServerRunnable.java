@@ -9,15 +9,17 @@ import static util.ColouredPrinter.printlnColoured;
 
 public class SmartHomeServerRunnable implements Runnable {
 
+    private static final int port = 9090;
+
     @Override
     public void run() {
         SmartHomeServerDevicesBuilder creator = new SmartHomeServerDevicesBuilder()
                 .addNewDevice(createGateDeviceHandler())
                 .addNewDevice(createFreezerDeviceHandler())
                 .addNewDevice(createFridgeDeviceHandler())
-                .create();
+                .create(port);
 
-        printlnColoured("Server has started running: ", ConsoleColor.GREEN_BOLD);
+        printlnColoured("Server has started running, listening on port: " + port, ConsoleColor.GREEN_BOLD);
         creator.serve();
     }
 
