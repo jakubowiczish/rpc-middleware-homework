@@ -48,7 +48,7 @@ cd grpc/server_grpc
 In order to generate files (they are already generated)
 
 ```
-cd cd grpc/client_grpc
+cd grpc/client_grpc
 .\python_gen_air_quality.bat
 ```
 
@@ -85,8 +85,71 @@ poetry run python air_quality_client.py
 
 #### THRIFT
 
+##### Server
 
+- Generate
 
+In order to generate files (they are already generated)
+
+```
+cd thrift/server_thrift
+.\java_gen_smart_home.bat
+```
+
+- Build & Run
+
+or 
+
+```
+cd thrift/server_thrift
+.\build_and_run.bat
+```
+
+or
+
+Just run SmartHomeServerRunner.java in Intellij IDEA
+
+or
+
+```
+cd thrift/server_thrift
+.\build.bat
+.\run.bat
+```
+
+##### Client
+
+- Generate
+
+In order to generate files (they are already generated)
+
+```
+cd thrift/server_thrift
+.\python_gen_smart_home.bat
+```
+
+- Run
+
+```
+cd thrift/server_thrift
+.\build_and_run.bat
+```
+
+or 
+
+```
+cd thrift/server_thrift
+.\build.bat
+.\run.bat
+```
+
+or 
+
+```
+cd thrift/server_thrift
+poetry install
+poetry run python smart_home_client.py
+```
 
 ### Opis zadania domowego - technologie middleware
 
